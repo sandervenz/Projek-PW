@@ -1,0 +1,45 @@
+{
+  "name": "middleware-multer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "index": "nodemon src/index.ts",
+    "docs": "ts-node src/docs/swagger.ts",
+    "dev": "ts-node-dev src/index.ts",
+    "start": "ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/dotenv": "^8.2.0",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.14.4",
+    "@types/nodemailer": "^6.4.15",
+    "@types/swagger-ui-express": "^4.1.6",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^2.2.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.8.1",
+    "mongoose": "^8.4.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.15",
+    "nodemon": "^3.1.4",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "4.6.3",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6"
+  }
+}
