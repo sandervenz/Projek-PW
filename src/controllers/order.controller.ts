@@ -57,15 +57,15 @@ async function createOrder(req: IRequestWithUser, res: Response) {
       const savedOrder = await newOrder.save();
 
       const user = await UserModel.findById(userId);
-      const userName = user ? user.fullName : 'Unknown';
+      const userName = user ? user.name : 'Unknown';
 
       if (user && user.email) {
         const content = await mail.render('invoice.ejs', {
-          customerName: user.fullName,
+          customerName: user.name,
           orderItems: savedOrder.orderItems,
           grandTotal: savedOrder.grandTotal,
-          contactEmail: "supportsander@example.com",
-          companyName: "Toko Sander",
+          contactEmail: "moontessesteakhouse@example.com",
+          companyName: "MoonTesse' Steak House",
           year: new Date().getFullYear(),
         });
 

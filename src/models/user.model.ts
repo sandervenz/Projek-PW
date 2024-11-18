@@ -2,12 +2,10 @@ import mongoose from "mongoose";
 import { encrypt } from "../utils/encryption";
 
 export interface User {
-  fullName: string;
-  username: string;
+  name: string;
   email: string;
   password: string;
-  roles: string[];
-  profilePicture: string;
+  telp: number;
   createdAt?: string;
 }
 
@@ -15,14 +13,9 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema<User>(
   {
-    fullName: {
+    name: {
       type: Schema.Types.String,
       required: true,
-    },
-    username: {
-      type: Schema.Types.String,
-      required: true,
-      unique: true,
     },
     email: {
       type: Schema.Types.String,
@@ -33,15 +26,10 @@ const UserSchema = new Schema<User>(
       type: Schema.Types.String,
       required: true,
     },
-    roles: {
-      type: [Schema.Types.String],
-      enum: ["admin", "user"],
-      default: ["user"],
-    },
-    profilePicture: {
-      type: Schema.Types.String,
-      default: "user.jpg",
-    },
+    telp: {
+      type: Schema.Types.Number,
+      required: true,
+    }
   },
   {
     timestamps: true,

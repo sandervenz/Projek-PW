@@ -108,7 +108,7 @@ SEND
 
 
 ORDERS
-* add request, gunakan POST pada path http://localhost:3000/api/orders untuk melakukan order
+* add request, gunakan POST pada path http://localhost:3000/menu/orders untuk melakukan order
 - pilih tab headers, isi key dengan "Authorization", dan value "Bearer <paste token login yang tadi>"
 - isi tab body yang anda ingin order, contoh :
 {
@@ -147,7 +147,7 @@ SEND
     }
 }
 
-* add request, gunakan GET pada path http://localhost:3000/api/orders untuk melihat order setelah melakukan order tadi
+* add request, gunakan GET pada path http://localhost:3000/menu/orders untuk melihat order setelah melakukan order tadi
 - pilih tab headers, isi key dengan "Authorization", dan value "Bearer <paste token login yang tadi>"
 SEND
 - contoh data akan keluar :
@@ -176,17 +176,4 @@ SEND
 }
 
 
-* bisa cek produk pada bagian GET /products untuk melihat produk kembali
-* barang akan berkurang sesuai yang sudah diorder
 
-CATATAN, untuk mendapat invoice order pada email anda
-- register menggunakan email aktif anda
-- lakukan login dengan email aktif anda
-- lakukan order seperti cara diatas
-invoice order anda akan dikirimkan ke email akun login anda
-
-CTRL + C untuk mematikan server
-
-
-Sander,
-Sanbercode Backend Nodejs

@@ -5,7 +5,7 @@ declare global {
     interface Request {
       user?: {
         id: ObjectId;
-        roles: string[];
+        telp: number;
       };
     }
   }
