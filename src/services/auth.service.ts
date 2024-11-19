@@ -25,7 +25,7 @@ export const login = async (payload: ILoginPayload): Promise<string> => {
 
   const token = generateToken({
     id: userByEmail.id,
-    telp: userByEmail.telp,
+    roles: userByEmail.roles,
   });
 
   return token;
@@ -33,15 +33,17 @@ export const login = async (payload: ILoginPayload): Promise<string> => {
 
 interface IRegisterPayload {
   email: string;
-  name: string;
-  telp: number;
+  username: string;
+  password: string;
+  roles: (string | undefined)[] | undefined;
 }
 export const register = async (payload: IRegisterPayload): Promise<User> => {
-  const { email, name, telp } = payload;
+  const { email, username, password, roles } = payload;
   const user = await UserModel.create({
     email,
-    name,
-    telp,
+    password,
+    username,
+    roles,
   });
 
   return user;

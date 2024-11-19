@@ -12,28 +12,30 @@ const router = express.Router();
 
 // CRUD Categories
 router.get("/categories", categoriesController.findAll);
-router.post("/categories", authMiddleware, categoriesController.create);
+router.post("/categories", categoriesController.create);
 router.get("/categories/:id", categoriesController.findOne);
-router.put("/categories/:id", authMiddleware, categoriesController.update);
-router.delete("/categories/:id", authMiddleware, categoriesController.delete);
+router.put("/categories/:id", categoriesController.update);
+router.delete("/categories/:id", categoriesController.delete);
 
 // CRUD Products
 router.get("/products", productsController.findAll);
-router.post("/products", authMiddleware, productsController.create);
+router.post("/products", productsController.create);
 router.get("/products/:id", productsController.findOne);
-router.put("/products/:id", authMiddleware, productsController.update);
-router.delete("/products/:id", authMiddleware, productsController.delete);
+router.put("/products/:id", productsController.update);
+router.delete("/products/:id", productsController.delete);
 
 // Upload routes
-router.post("/upload", authMiddleware, uploadMiddleware.single, uploadController.single);
-router.post("/uploads", authMiddleware, uploadMiddleware.multiple, uploadController.multiple);
+router.post("/upload", uploadMiddleware.single, uploadController.single);
+router.post("/uploads", uploadMiddleware.multiple, uploadController.multiple);
 
 // Auth routes
-router.post("/auth/login", authMiddleware, authController.login);
+router.post("/auth/login", authController.login);
 router.post("/auth/register", authController.register);
+router.get("/auth/me", authMiddleware, rbacMiddleware(["admin"]), authController.me);
+router.put("/auth/update-profile", authMiddleware, authController.profile);
 
 // Order routes
-router.post("/orders", createOrder);
-router.get("/orders", findAllByUser);
+router.post("/orders", authMiddleware, createOrder);
+router.get("/orders", authMiddleware, findAllByUser);
 
 export default router;

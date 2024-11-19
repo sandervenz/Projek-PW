@@ -8,9 +8,14 @@ import { login, register, updateProfile } from "../services/auth.service";
 import { ObjectId } from "mongoose";
 
 const registerSchema = Yup.object().shape({
-    name: Yup.string().required(),
+    username: Yup.string().required(),
     email: Yup.string().email().required(),
-    telp: Yup.number().required(),
+    password: Yup.string().required(),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password"), ""],
+      "Passwords must match"
+    ),
+    roles: Yup.array().of(Yup.string()).optional(),
   });
   
   const loginSchema = Yup.object({
@@ -67,19 +72,22 @@ export default {
       }
       */    
       try {
-        const { email, name, telp } =
+        const { email, password, username, confirmPassword, roles } =
           req.body;
   
         await registerSchema.validate({
           email,
-          name,
-          telp,
+          password,
+          username,
+          confirmPassword,
+          roles,
         });
   
         const user = await register({
           email,
-          name,
-          telp,
+          username,
+          password,
+          roles,
         });
   
         res.status(200).json({
@@ -94,4 +102,62 @@ export default {
         });
       }
     },
-}
+    async me(req: IRequestWithUser, res: Response) {
+      /**
+       #swagger.tags = ['Auth']
+      #swagger.security = [{
+        "bearerAuth": []
+      }]
+      */    
+      try {
+        const id = req.user?.id;
+        const user = await UserModel.findById(id);
+        if (!user) {
+          return res.status(403).json({
+            message: "user not found",
+            data: null,
+          });
+        }
+  
+        res.status(200).json({
+          message: "success fetch user profile",
+          data: user,
+        });
+      } catch (error) {
+        const err = error as Error;
+        res.status(500).json({
+          data: err.message,
+          message: "Failed get user profile",
+        });
+      }
+    },
+    async profile(req: IRequestWithUser, res: Response) {
+      /**
+       #swagger.tags = ['Auth']
+      #swagger.requestBody = {
+        required: true,
+        schema: {$ref: "#/components/schemas/UpdateProfileRequest"}
+      }
+      #swagger.security = [{
+        "bearerAuth": []
+      }]
+      */    
+      try {
+        const id = req.user?.id;
+        const result = await updateProfile(
+          id as unknown as ObjectId,
+          req.body as User
+        );
+        res.status(200).json({
+          message: "Profile updated successfully",
+          data: result,
+        });
+      } catch (error) {
+        const err = error as Error;
+        res.status(500).json({
+          data: err.message,
+          message: "Failed update user profile",
+        });
+      }
+    },
+  };
