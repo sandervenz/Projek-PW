@@ -6,7 +6,6 @@ export interface Product {
   images: string[];
   price: number;
   qty: number;
-  categoryId: Types.ObjectId;
   createdAt: string;
   updatedAt: string;
   _id?: Types.ObjectId;
@@ -36,10 +35,6 @@ const ProductsSchema = new Schema<Product>(
       type: Schema.Types.Number,
       required: true,
       min: [1, "Minimal qty adalah 1"],
-    },
-    categoryId: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
     },
   },
   {

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steakhouse - Order System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #8B4E2A;
+            padding: 10px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #5C4033;
+            border-radius: 5px;
+        }
+
+        /* Content Section */
+        .content {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        /* Menu Section */
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        .menu-category {
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .menu-category h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .menu-item h3 {
+            font-size: 22px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .menu-item p {
+            font-size: 16px;
+            color: #888;
+        }
+
+        .menu-item .price {
+            font-size: 18px;
+            color: #8B4E2A;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .menu-item button {
+            padding: 8px 15px;
+            background-color: #8B4E2A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .menu-item button:hover {
+            background-color: #5C4033;
+        }
+
+        /* Order Summary Section */
+        #order-summary {
+            padding: 20px;
+        }
+
+        #order-summary h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Order Item */
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .order-item h4 {
+            font-size: 18px;
+        }
+
+        .order-item .right-side {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+            min-width: 120px;
+        }
+
+        .order-item .price {
+            font-size: 18px;
+            color: #8B4E2A;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .order-item button {
+            font-size: 18px;
+            padding: 5px 10px;
+            background-color: #8B4E2A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .order-item button:hover {
+            background-color: #5C4033;
+        }
+
+        /* Continue to Payment Button */
+        .continue-payment {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .continue-payment button {
+            font-size: 18px;
+            padding: 15px 30px;
+            background-color: #8B4E2A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .continue-payment button:hover {
+            background-color: #5C4033;
+        }
+
+        /* Admin Panel */
+        #admin-panel {
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .admin-order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .admin-order-item button {
+            font-size: 16px;
+        }
+
+        .admin-order-item p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" onclick="showHome()">Home</a>
+        <a href="#" onclick="showMenu()">Menu</a>
+        <a href="#" onclick="showOrderSummary()">Order Summary</a>
+        <a href="#" onclick="showPayment()">Payment</a>
+        <a href="#" onclick="showInvoice()">Invoice</a>
+        <a href="#" onclick="showAdminPanelWithPassword()">Admin</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="content visible">
+        <h1>Welcome to Our Steakhouse</h1>
+        <p>We offer the finest selection of steaks, delicious sides, and refreshing drinks. Explore our menu and enjoy a
+            memorable dining experience.</p>
+    </section>
+
+<!-- Menu Section -->
+<section id="menu" class="content">
+    <h2>Our Menu</h2>
+
+    <!-- Makanan (Food) Category -->
+    <div class="menu-category">
+        <h2>Food</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <img src="steak1.jpg" alt="Steak Sirloin">
+                <h3>Steak Sirloin</h3>
+                <p>A tender and juicy sirloin steak cooked to perfection.</p>
+                <span class="price">$22.99</span>
+                <button onclick="addItem('Steak Sirloin', 22.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="steak2.jpg" alt="Ribeye Steak">
+                <h3>Ribeye Steak</h3>
+                <p>A marbled ribeye steak for a rich, juicy flavor.</p>
+                <span class="price">$24.99</span>
+                <button onclick="addItem('Ribeye Steak', 24.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="steak3.jpg" alt="T-bone Steak">
+                <h3>T-bone Steak</h3>
+                <p>A perfect combination of tenderloin and strip steak.</p>
+                <span class="price">$27.99</span>
+                <button onclick="addItem('T-bone Steak', 27.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="steak4.jpg" alt="Filet Mignon">
+                <h3>Filet Mignon</h3>
+                <p>A melt-in-your-mouth cut of tenderloin steak.</p>
+                <span class="price">$32.99</span>
+                <button onclick="addItem('Filet Mignon', 32.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="steak5.jpg" alt="Porterhouse Steak">
+                <h3>Porterhouse Steak</h3>
+                <p>A large, flavorful steak with a tenderloin and strip steak combo.</p>
+                <span class="price">$34.99</span>
+                <button onclick="addItem('Porterhouse Steak', 34.99)">Add</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minuman (Drinks) Category -->
+    <div class="menu-category">
+        <h2>Drinks</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <img src="drink1.jpg" alt="Red Wine">
+                <h3>Red Wine</h3>
+                <p>Rich and flavorful red wine to complement your meal.</p>
+                <span class="price">$8.99</span>
+                <button onclick="addItem('Red Wine', 8.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="drink2.jpg" alt="Beer">
+                <h3>Beer</h3>
+                <p>A chilled beer to enjoy with your steak.</p>
+                <span class="price">$4.99</span>
+                <button onclick="addItem('Beer', 4.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="drink3.jpg" alt="Whiskey">
+                <h3>Whiskey</h3>
+                <p>A smooth and bold whiskey to accompany your meal.</p>
+                <span class="price">$12.99</span>
+                <button onclick="addItem('Whiskey', 12.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="drink4.jpg" alt="Sparkling Water">
+                <h3>Sparkling Water</h3>
+                <p>Refreshing sparkling water to cleanse your palate.</p>
+                <span class="price">$3.99</span>
+                <button onclick="addItem('Sparkling Water', 3.99)">Add</button>
+            </div>
+            <div class="menu-item">
+                <img src="drink5.jpg" alt="Cocktail">
+                <h3>Cocktail</h3>
+                <p>A refreshing cocktail mixed to perfection.</p>
+                <span class="price">$10.99</span>
+                <button onclick="addItem('Cocktail', 10.99)">Add</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Order Summary Section -->
+    <section id="order-summary" class="content">
+        <h2>Order Summary</h2>
+        <div id="order-items"></div>
+        <div class="continue-payment">
+            <button onclick="showPayment()">Continue to Payment</button>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment" class="content">
+        <h2>Payment</h2>
+        <p>Your total is <span id="total-price">$0.00</span></p>
+        <button onclick="generateInvoice()">Proceed to Invoice</button>
+    </section>
+
+    <!-- Invoice Section -->
+    <section id="invoice" class="content">
+        <h2>Invoice</h2>
+        <p>Your invoice is being generated...</p>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin-panel" class="content">
+        <h2>Admin Panel</h2>
+        <div class="admin-order-item">
+            <p>Order from Table 1: Steak Sirloin, Beer</p>
+            <button onclick="updateOrderStatus(1, 'In Progress')">In Progress</button>
+            <button onclick="updateOrderStatus(1, 'Completed')">Completed</button>
+        </div>
+        <div class="admin-order-item">
+            <p>Order from Table 2: Ribeye Steak, Red Wine</p>
+            <button onclick="updateOrderStatus(2, 'In Progress')">In Progress</button>
+            <button onclick="updateOrderStatus(2, 'Completed')">Completed</button>
+        </div>
+    </section>
+
+    <script>
+        let orderItems = [];
+
+        // Function to switch between sections
+        function showHome() {
+            setVisibleSection('home');
+        }
+
+        function showMenu() {
+            setVisibleSection('menu');
+        }
+
+        function showOrderSummary() {
+            setVisibleSection('order-summary');
+            renderOrder();
+        }
+
+        function showPayment() {
+            setVisibleSection('payment');
+            updateTotalPrice();
+        }
+
+        function showInvoice() {
+            setVisibleSection('invoice');
+        }
+
+        function showAdminPanel() {
+            setVisibleSection('admin-panel');
+        }
+
+        // Function to show admin panel with password check
+            function showAdminPanelWithPassword() {
+                const password = prompt('Please enter the admin password:');
+                if (password === 'admin123') {
+                    showAdminPanel();
+                } else {
+                    alert('Incorrect password!');
+                }
+            }
+
+
+        // Function to show admin panel with password check
+            function showAdminPanelWithPassword() {
+                const password = prompt('Please enter the admin password:');
+                if (password === 'admin123') {
+                    showAdminPanel();
+                } else {
+                    alert('Incorrect password!');
+                }
+            }
+
+
+        // Helper function to set visible section
+        function setVisibleSection(sectionId) {
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => {
+                section.classList.remove('visible');
+            });
+            document.getElementById(sectionId).classList.add('visible');
+        }
+
+        // Add item to order
+        function addItem(name, price) {
+            const item = { name, price, quantity: 1 };
+            const existingItem = orderItems.find(orderItem => orderItem.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                orderItems.push(item);
+            }
+            renderOrder();
+        }
+
+        // Render order items
+        function renderOrder() {
+            const orderItemsContainer = document.getElementById('order-items');
+            orderItemsContainer.innerHTML = '';
+            orderItems.forEach(item => {
+                const orderItemDiv = document.createElement('div');
+                orderItemDiv.classList.add('order-item');
+                orderItemDiv.innerHTML = `
+                    <h4>${item.name}</h4>
+                    <div class="right-side">
+                        <div>
+                            <button onclick="updateItemQuantity('${item.name}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateItemQuantity('${item.name}', 1)">+</button>
+                        </div>
+                        <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>
+                        <button onclick="removeItem('${item.name}')">Remove</button>
+                    </div>
+                `;
+                orderItemsContainer.appendChild(orderItemDiv);
+            });
+        }
+
+        // Update item quantity
+        function updateItemQuantity(name, quantity) {
+            const item = orderItems.find(orderItem => orderItem.name === name);
+            if (item) {
+                item.quantity += quantity;
+                if (item.quantity <= 0) {
+                    removeItem(name);
+                } else {
+                    renderOrder();
+                }
+            }
+        }
+
+        // Remove item from order
+        function removeItem(name) {
+            orderItems = orderItems.filter(item => item.name !== name);
+            renderOrder();
+        }
+
+        // Update total price
+        function updateTotalPrice() {
+            const total = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
+            document.getElementById('total-price').innerText = `$${total.toFixed(2)}`;
+        }
+
+        // Generate invoice
+        function generateInvoice() {
+            const tableNumber = prompt('Enter table number:');
+            let invoiceContent = `<h1>Invoice for Table ${tableNumber}</h1><ul>`;
+            orderItems.forEach(item => {
+                invoiceContent += `<li>${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}</li>`;
+            });
+            const total = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
+            invoiceContent += `<li>Total: $${total.toFixed(2)}</li></ul>`;
+            const invoiceWindow = window.open('', '_blank');
+            invoiceWindow.document.write(invoiceContent);
+            invoiceWindow.print();
+        }
+
+        // Update order status in admin panel
+        function updateOrderStatus(orderId, status) {
+            alert(`Order ${orderId} status updated to: ${status}`);
+        }
+    </script>
+</body>
+
+</html>

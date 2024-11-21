@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #8B4E2A;
+    padding: 10px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    background-color: #5C4033;
+    border-radius: 5px;
+}
+
+/* Content Section */
+.content {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+/* Menu Section */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.menu-category {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.menu-category h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+}
+
+.menu-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.menu-item h3 {
+    font-size: 22px;
+    margin: 15px 0;
+}
+
+.menu-item p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.menu-item .price {
+    font-size: 18px;
+    color: #8B4E2A;
+    font-weight: bold;
+}
+
+.menu-item button {
+    font-size: 16px;
+    background-color: #8B4E2A;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-item button:hover {
+    background-color: #5C4033;
+}
+
+/* Order Summary */
+#order-summary {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#order-summary h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.order-item h4 {
+    font-size: 18px;
+}
+
+.order-item .right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-width: 120px;
+}
+
+.order-item .price {
+    font-size: 18px;
+    color: #8B4E2A;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.order-item button {
+    font-size: 18px;
+    padding: 5px 10px;
+    background-color: #8B4E2A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-item button:hover {
+    background-color: #5C4033;
+}
+
+.continue-payment {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.continue-payment button {
+    font-size: 18px;
+    padding: 15px 30px;
+    background-color: #8B4E2A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+}
+
+.continue-payment button:hover {
+    background-color: #5C4033;
+}
+
+/* Invoice Section */
+#invoice-section {
+    margin-top: 20px;
+    border: 2px solid #000;
+    padding: 15px;
+    background-color: #f4f4f4;
+}
+
+#invoice-details p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+#invoice-items li {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+#invoice-total-amount {
+    font-weight: bold;
+    font-size: 18px;
+}

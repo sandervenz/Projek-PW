@@ -10,33 +10,15 @@ Cara eksekusi program projek ini
 
 buka postman
 
-CATEGORIES
-* add request pada postman, lalu copy path http://localhost:3000/api/categories
-- gunakan POST untuk mendaftarkan kategori baru, dengan isi body, contoh:
-{
-    "name": "Pakaian"
-}
-SEND
-- gunakan GET untuk melihat kategori yang ada, SEND
-- gunakan GET tambahkan Id pada path untuk melihat kategori tertentu, contoh : http://localhost:3000/api/categories/66e2f381abf9bf18c801c537, SEND
-- gunakan PUT untuk mengubah isi/nama kategori, tambahkan Id pada path yang ingin diubah, contoh : http://localhost:3000/api/categories/66e2f381abf9bf18c801c537
-isi pada bagian body dengan nama kategori baru, contoh :
-{
-    "name": "Perhiasan"
-} 
-SEND
-- gunakan DELETE untuk menghapus kategori, tambahkan Id yang ingin di hapus, SEND
-
 PRODUCTS
 * add request pada postman, lalu copy path http://localhost:3000/api/products/
 - gunakan POST untuk mendaftarkan produk baru, dengan isi body, isi categoryId sesuai Id kategori yang ingin isi contoh:
 {
-    "name": "Kemeja Pria",
-    "description" : "Kemeja Hitam",
-    "images" : ["https://res.cloudinary.com/drkp2wxz4/image/upload/v1724829863/samples/smile.jpg"],
+    "name": "Ribeye Steak",
+    "description" : "Ribeye Steak",
+    "images" : ["https://res.cloudinary.com/drkp2wxz4/image/upload/v1724831390/1724831387018.jpg"],
     "price": 100000,
-    "qty": 15,
-    "categoryId": "66e2f381abf9bf18c801c537"   // ini contoh Id kategori pakaian
+    "qty": 100,
 }
 SEND
 - gunakan GET untuk melihat semua produk yang ada, SEND
