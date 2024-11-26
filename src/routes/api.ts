@@ -5,6 +5,7 @@ import productsController from "../controllers/products.controller";
 import authController from "../controllers/auth.controller";
 import authMiddleware from "../middlewares/auth.middleware";
 import { createOrder, findAllOrders } from "../controllers/order.controller";
+import { changeOrderStatus } from '../controllers/status.controller';
 
 const router = express.Router();
 
@@ -26,6 +27,8 @@ router.put("/auth/update-profile", authMiddleware, authController.profile);
 
 // Order routes
 router.post("/orders", createOrder);
-router.get("/orders", authMiddleware, findAllOrders);
+router.get("/orders", findAllOrders);
+// Status order
+router.patch('/orders/:id/status', authMiddleware, changeOrderStatus);
 
 export default router;

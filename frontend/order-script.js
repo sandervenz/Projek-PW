@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let quantity = parseInt(quantityInput.value);
             if (quantity > 0) {
                 quantityInput.value = quantity - 1;
-                updateItemTotalPrazice();
+                updateItemTotalPrice();
                 updateOverallTotalPrice();
             }
         });
