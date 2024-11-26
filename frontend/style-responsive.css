@@ -26,8 +26,6 @@
 		header.fixed .site-branding{
 			top: 0;
 		}
-		.site-branding a.logo{
-		}
 		.site-branding a.logo img{
 			max-width: 120px;
 			height: auto;

@@ -73,9 +73,6 @@
 			justify-content: space-between;
 		}
 
-
-		.site-branding{
-		}
 		.site-branding a.logo{
 			float: left;
 			text-decoration: none;
@@ -136,9 +133,7 @@
 			color: #000;
 			transition: top 0.5s ease;
 		}
-		.navicons a.navshow span{
-			
-		}
+
 		
 		.navicons a.navhide{
 			position: fixed;
@@ -159,16 +154,10 @@
 		}
 
 
-
-		.sitenav{}
-		.navwrap{}
 		.navouter{
 			display: flex;
 		}
 
-		nav.headermenu{}
-		nav.headermenu ul{
-		}
 		nav.headermenu ul li{
 			float: left;
 			text-align:left;
@@ -264,9 +253,7 @@
 			align-items: center;
 			justify-content: space-between;
 		}
-		.bannercontent .text{
-			
-		}
+		
 		.bannercontent .text h3{
 			color:#fff;
 			font-size:40px;
@@ -679,3 +666,4 @@
 .order-btn:hover {
     background-color: #e53935;  /* Ubah warna hover sesuai keinginan */
 }
+				}

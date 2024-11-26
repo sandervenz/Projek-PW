@@ -23,7 +23,6 @@ router.post("/uploads", uploadMiddleware.multiple, uploadController.multiple);
 // Auth routes
 router.post("/auth/login", authController.login);
 router.post("/auth/register", authController.register);
-router.put("/auth/update-profile", authMiddleware, authController.profile);
 
 // Order routes
 router.post("/orders", createOrder);

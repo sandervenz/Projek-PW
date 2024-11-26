@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="FoodScoop">
+    <title>Login - FoodScoop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Sama seperti CSS sebelumnya */
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f44336, #e53935);
+            color: #fff;
+        }
+
+        .login-container {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f44336;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container label {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .login-container input {
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+
+        .login-container input:focus {
+            outline: none;
+            border-color: #f44336;
+            box-shadow: 0 0 5px rgba(244, 67, 54, 0.5);
+        }
+
+        .login-container button {
+            padding: 12px;
+            background-color: #f44336;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #e53935;
+        }
+
+        .login-container .register-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .login-container .register-link a {
+            color: #f44336;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-container .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Hello Admin!</h2>
+        <div class="error-message" id="error-message"></div>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="button" onclick="validateLogin()">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Demo username and password
+        const validUsername = "admin";
+        const validPassword = "12345";
+
+        function validateLogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            if (username === validUsername && password === validPassword) {
+                // Redirect to admin dashboard
+                window.location.href = "admin-v.html";  // Ensure this matches the actual path of your admin page
+            } else {
+                // Show error messagec
+                errorMessage.textContent = "Invalid username or password!";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
