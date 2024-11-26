@@ -60,7 +60,6 @@
       </div>
       <div class="content">
         <h2>Thank you for your purchase!</h2>
-        <p>Dear <%= customerName %>,</p>
         <p>Thank you for your order. Below are the details of your purchase:</p>
         <table class="order-details">
           <tr>
@@ -89,10 +88,10 @@
           contactEmail %>.
         </p>
         <p>Best regards,</p>
-        <p>Steakhouse</p>
+        <p><%= companyName %></p>
       </div>
       <div class="footer">
-        <p>&copy; <%= year %> Steakhouse. All rights reserved.</p>
+        <p>&copy; <%= year %> <%= companyName %>. All rights reserved.</p>
       </div>
     </div>
   </body>

@@ -1,516 +1,390 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steakhouse - Order System</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #f2f2f2;
-            color: #333;
-        }
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
+		<title>FoodScoop - Food & Restaurant Template</title>
+	
+		<link rel="icon" type="image/png" href="images/favicon.png">
+	
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+			rel="stylesheet">
+	
+		<!-- FONT ICONS -->
+		<link rel="stylesheet" href="fonts/icons-linear.css">
+		<link rel="stylesheet" href="fonts/icons-fontawesome/css/all.min.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style-responsive.css">
+	
+		<style>
+			/* Container tombol Order Now */
+			.order-now-container {
+				display: flex;
+				justify-content: center;
+				/* Menyusun tombol di tengah secara horizontal */
+				align-items: center;
+				/* Menjaga posisi vertikal tetap di tengah */
+				margin-top: 30px;
+				/* Memberikan jarak atas agar tombol tidak menempel ke menu */
+				margin-bottom: 50px;
+				/* Memberikan jarak bawah agar tombol tidak terlalu dekat dengan bagian bawah */
+			}
+		
+			/* Gaya tombol Order Now */
+			.order-btn {
+				padding: 15px 40px;
+				background-color: #f44336;
+				/* Warna tombol */
+				color: white;
+				font-size: 18px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+		
+			/* Efek hover tombol */
+			.order-btn:hover {
+				background-color: #e53935;
+				/* Warna tombol saat hover */
+			}
+		</style>
 
-        /* Navbar Styles */
-        .navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #8B4E2A;
-            padding: 10px;
-        }
+	</head>
 
-        .navbar a {
-            text-decoration: none;
-            color: #fff;
-            padding: 10px 20px;
-            margin: 0 15px;
-            font-size: 18px;
-        }
 
-        .navbar a:hover {
-            background-color: #5C4033;
-            border-radius: 5px;
-        }
 
-        /* Content Section */
-        .content {
-            display: none;
-        }
+		<script src="js/jquery.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="contactform/contactform.js"></script>
+		<script src="js/menuscript.js"></script>
+	</head>
 
-        .visible {
-            display: block;
-        }
 
-        /* Menu Section */
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            justify-items: center;
-        }
 
-        .menu-category {
-            width: 100%;
-            margin-top: 40px;
-        }
 
-        .menu-category h2 {
-            text-align: center;
-            font-size: 30px;
-            margin-bottom: 20px;
-        }
+	<body id="home">
+		
 
-        .menu-item {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 300px;
-            transition: transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
 
-        .menu-item:hover {
-            transform: translateY(-5px);
-        }
 
-        .menu-item img {
-            width: 100%;
-            border-radius: 10px;
-        }
+		
+		<header>
+			<div class="container psr">
 
-        .menu-item h3 {
-            font-size: 22px;
-            margin: 10px 0;
-            color: #333;
-        }
+				<div class="header_default">
 
-        .menu-item p {
-            font-size: 16px;
-            color: #888;
-        }
 
-        .menu-item .price {
-            font-size: 18px;
-            color: #8B4E2A;
-            font-weight: bold;
-            margin: 10px 0;
-        }
+					<div class="site-branding">
+						<a href="index.html" class="logo">
+							<img src="images/food-scoop-logo-white.png" alt="" class="logo-1">
+							<img src="images/food-scoop-logo.png" alt="" class="logo-2">
+						</a>
+					</div>
 
-        .menu-item button {
-            padding: 8px 15px;
-            background-color: #8B4E2A;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
 
-        .menu-item button:hover {
-            background-color: #5C4033;
-        }
+					<div class="header-right">
 
-        /* Order Summary Section */
-        #order-summary {
-            padding: 20px;
-        }
 
-        #order-summary h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+						<div class="site-navwrap">
+							<div class="navicons">
+		                		<a href="javascript:void;" class="navshow">
+		                			<span class="lnr lnr-menu"></span>
+		                		</a>
+		                		<a href="javascript:void;" class="navhide">
+		                			<span class="lnr lnr-cross"></span>
+		                		</a>
+		            		</div>
+	      
+		            		<div class="sitenav" id="sitenav">
+		            			<div class="navwrap">
+									<div class="navouter">
 
-        /* Order Item */
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
 
-        .order-item h4 {
-            font-size: 18px;
-        }
+										<nav class="headermenu leftmenu" id="headnav" role="navigation">
+											<ul>
+												<li class="active"><a href="#home">Home</a></li>
+												<li><a href="#about">About</a></li>
+												<li><a href="#foodmenu">Menu</a></li>
+												<li class="contact"><a href="#contact">Get in Touch</a></li>
+											</ul>
+										</nav>
 
-        .order-item .right-side {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: space-between;
-            min-width: 120px;
-        }
 
-        .order-item .price {
-            font-size: 18px;
-            color: #8B4E2A;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+									</div>
+								</div>
+				            </div>
+				            <!--sitenav-->
+						</div>
+						<!--site-navwrap-->	
 
-        .order-item button {
-            font-size: 18px;
-            padding: 5px 10px;
-            background-color: #8B4E2A;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+						<div class="contact-info">
+							<a href="tel:#">
+								<i class="fa-solid fa-phone-volume"></i>
+								0123456789
+							</a>	
+							<a href="#"><i class="fa-brands fa-instagram"></i></a>
+							<a href="#"><i class="fa-brands fa-youtube"></i></a>
+						</div>
+					</div>
+						
 
-        .order-item button:hover {
-            background-color: #5C4033;
-        }
 
-        /* Continue to Payment Button */
-        .continue-payment {
-            text-align: center;
-            margin-top: 20px;
-        }
+				</div>
+				<!--header_default-->
+					
+			</div>
+		</header>
+		<!-- HEADER -->
 
-        .continue-payment button {
-            font-size: 18px;
-            padding: 15px 30px;
-            background-color: #8B4E2A;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 200px;
-        }
 
-        .continue-payment button:hover {
-            background-color: #5C4033;
-        }
 
-        /* Admin Panel */
-        #admin-panel {
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-        }
 
-        .admin-order-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
 
-        .admin-order-item button {
-            font-size: 16px;
-        }
 
-        .admin-order-item p {
-            font-size: 18px;
-        }
-    </style>
-</head>
 
-<body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="#" onclick="showHome()">Home</a>
-        <a href="#" onclick="showMenu()">Menu</a>
-        <a href="#" onclick="showOrderSummary()">Order Summary</a>
-        <a href="#" onclick="showPayment()">Payment</a>
-        <a href="#" onclick="showInvoice()">Invoice</a>
-        <a href="#" onclick="showAdminPanelWithPassword()">Admin</a>
-    </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="content visible">
-        <h1>Welcome to Our Steakhouse</h1>
-        <p>We offer the finest selection of steaks, delicious sides, and refreshing drinks. Explore our menu and enjoy a
-            memorable dining experience.</p>
-    </section>
 
-<!-- Menu Section -->
-<section id="menu" class="content">
-    <h2>Our Menu</h2>
+		<section class="banner">
+			<div class="container">
+				
+				<div class="bannercontent">
+					
 
-    <!-- Makanan (Food) Category -->
-    <div class="menu-category">
-        <h2>Food</h2>
-        <div class="menu">
-            <div class="menu-item">
-                <img src="steak1.jpg" alt="Steak Sirloin">
-                <h3>Steak Sirloin</h3>
-                <p>A tender and juicy sirloin steak cooked to perfection.</p>
-                <span class="price">$22.99</span>
-                <button onclick="addItem('Steak Sirloin', 22.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="steak2.jpg" alt="Ribeye Steak">
-                <h3>Ribeye Steak</h3>
-                <p>A marbled ribeye steak for a rich, juicy flavor.</p>
-                <span class="price">$24.99</span>
-                <button onclick="addItem('Ribeye Steak', 24.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="steak3.jpg" alt="T-bone Steak">
-                <h3>T-bone Steak</h3>
-                <p>A perfect combination of tenderloin and strip steak.</p>
-                <span class="price">$27.99</span>
-                <button onclick="addItem('T-bone Steak', 27.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="steak4.jpg" alt="Filet Mignon">
-                <h3>Filet Mignon</h3>
-                <p>A melt-in-your-mouth cut of tenderloin steak.</p>
-                <span class="price">$32.99</span>
-                <button onclick="addItem('Filet Mignon', 32.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="steak5.jpg" alt="Porterhouse Steak">
-                <h3>Porterhouse Steak</h3>
-                <p>A large, flavorful steak with a tenderloin and strip steak combo.</p>
-                <span class="price">$34.99</span>
-                <button onclick="addItem('Porterhouse Steak', 34.99)">Add</button>
-            </div>
-        </div>
-    </div>
+					<div class="text full">
+						<h3>Fresh Cooked</h3>
+						<h2>
+							Breakfast, Lunch and Dinner.
+						</h2>
+						<p>
+							<u>20% Off</u> on Weekends
+						</p>
+					</div>
+					
 
-    <!-- Minuman (Drinks) Category -->
-    <div class="menu-category">
-        <h2>Drinks</h2>
-        <div class="menu">
-            <div class="menu-item">
-                <img src="drink1.jpg" alt="Red Wine">
-                <h3>Red Wine</h3>
-                <p>Rich and flavorful red wine to complement your meal.</p>
-                <span class="price">$8.99</span>
-                <button onclick="addItem('Red Wine', 8.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="drink2.jpg" alt="Beer">
-                <h3>Beer</h3>
-                <p>A chilled beer to enjoy with your steak.</p>
-                <span class="price">$4.99</span>
-                <button onclick="addItem('Beer', 4.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="drink3.jpg" alt="Whiskey">
-                <h3>Whiskey</h3>
-                <p>A smooth and bold whiskey to accompany your meal.</p>
-                <span class="price">$12.99</span>
-                <button onclick="addItem('Whiskey', 12.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="drink4.jpg" alt="Sparkling Water">
-                <h3>Sparkling Water</h3>
-                <p>Refreshing sparkling water to cleanse your palate.</p>
-                <span class="price">$3.99</span>
-                <button onclick="addItem('Sparkling Water', 3.99)">Add</button>
-            </div>
-            <div class="menu-item">
-                <img src="drink5.jpg" alt="Cocktail">
-                <h3>Cocktail</h3>
-                <p>A refreshing cocktail mixed to perfection.</p>
-                <span class="price">$10.99</span>
-                <button onclick="addItem('Cocktail', 10.99)">Add</button>
-            </div>
-        </div>
+				</div>
+				<!--bannercontent-->
+
+			</div>
+		</section>
+		<!-- BANNER -->
+
+
+
+
+
+
+
+		<section class="contentblock about" id="about">
+			<div class="container">
+				
+
+				<div class="contentinline">
+
+					<div class="text">
+						<h3>About</h3>
+						<h4>One of the Best Food Restaurants in Your City. </h4>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+						</p>
+						<ul>
+							<li>Lorem ipsum dolor sit amet.</li>
+							<li>Nam ut odio vel quam iaculis imperdiet.</li>
+							<li>Phasellus venenatis urna vel.</li>
+						</ul>		
+					</div>
+
+
+					<div class="imagearea">
+						<img src="images/pic1.jpg" alt="" />
+					</div>
+
+
+				</div>
+
+
+			</div>
+		</section>
+		<!-- ABOUT -->
+
+
+
+
+
+
+
+
+
+		<section class="foodmenu" id="foodmenu">
+			<div class="container">
+				<h3>Menu</h3>
+				<h4>Fantastic Finger-Licking Food</h4>
+		
+				<div class="menuitems_wrap">
+					<!-- Item Menu -->
+					<div class="item">
+						<img src="images/fooditem1.jpg" alt="">
+						<h6>Breakfast</h6>
+						<h5>Egg Pancake</h5>
+						<p>Price: $4.99</p>
+					</div>
+		
+					<div class="item">
+						<img src="images/fooditem2.jpg" alt="">
+						<h6>Breakfast</h6>
+						<h5>Scrambled Eggs</h5>
+						<p>Price: $7.99</p>
+					</div>
+		
+					<div class="item">
+						<img src="images/fooditem3.jpg" alt="">
+						<h6>Brunch</h6>
+						<h5>Brown Bread With Coffee</h5>
+						<p>Price: $3.99</p>
+					</div>
+		
+					<div class="item">
+						<img src="images/fooditem4.jpg" alt="">
+						<h6>Lunch</h6>
+						<h5>Rice, Fried Chicken, and Salad</h5>
+						<p>Price: $6.99</p>
+					</div>
+		
+					<div class="item">
+						<img src="images/fooditem5.jpg" alt="">
+						<h6>Lunch</h6>
+						<h5>Saucy Pasta</h5>
+						<p>Price: $5.99</p>
+					</div>
+		
+					<div class="item">
+						<img src="images/fooditem6.jpg" alt="">
+						<h6>Dinner</h6>
+						<h5>Dim Sum with Wine</h5>
+						<p>Price: $7.99</p>
+					</div>
+				</div>
+		
+				<!-- Tombol Order Now di tengah -->
+				<div class="order-now-container">
+					<button class="order-btn" onclick="window.location.href='order-page.html';">Order Now</button>
+				</div>
+			</div>
+		</section>
+
+				<!--menuitems_wrap-->
+		
+				<!-- Tombol Order Now -->
+				<div class="order-now-container">
+					<button class="order-btn" onclick="window.location.href='order-page.html';">Order Now</button>
+				</div>
+				</div>
+				</section>
+
+
+		<!-- MENU -->
     </div>
 </section>
+				<!--menuitems_wrap-->
+		
+				<div class="order-form">
+					<h3>Place Your Order</h3>
+					<form id="orderform" action="orderform/order.php" method="post">
+						<input type="text" name="name" placeholder="Your Name*" required>
+						<input type="email" name="email" placeholder="Your Email*" required>
+						<input type="text" name="address" placeholder="Delivery Address*" required>
+						<textarea name="order_details" placeholder="Order Details (e.g. Egg Pancake)" required></textarea>
+						<input type="submit" value="Submit Order">
+					</form>
+				</div>
+			</div>
+		</section>
+		<!-- MENU -->
 
 
-    <!-- Order Summary Section -->
-    <section id="order-summary" class="content">
-        <h2>Order Summary</h2>
-        <div id="order-items"></div>
-        <div class="continue-payment">
-            <button onclick="showPayment()">Continue to Payment</button>
-        </div>
-    </section>
-
-    <!-- Payment Section -->
-    <section id="payment" class="content">
-        <h2>Payment</h2>
-        <p>Your total is <span id="total-price">$0.00</span></p>
-        <button onclick="generateInvoice()">Proceed to Invoice</button>
-    </section>
-
-    <!-- Invoice Section -->
-    <section id="invoice" class="content">
-        <h2>Invoice</h2>
-        <p>Your invoice is being generated...</p>
-    </section>
-
-    <!-- Admin Panel -->
-    <section id="admin-panel" class="content">
-        <h2>Admin Panel</h2>
-        <div class="admin-order-item">
-            <p>Order from Table 1: Steak Sirloin, Beer</p>
-            <button onclick="updateOrderStatus(1, 'In Progress')">In Progress</button>
-            <button onclick="updateOrderStatus(1, 'Completed')">Completed</button>
-        </div>
-        <div class="admin-order-item">
-            <p>Order from Table 2: Ribeye Steak, Red Wine</p>
-            <button onclick="updateOrderStatus(2, 'In Progress')">In Progress</button>
-            <button onclick="updateOrderStatus(2, 'Completed')">Completed</button>
-        </div>
-    </section>
-
-    <script>
-        let orderItems = [];
-
-        // Function to switch between sections
-        function showHome() {
-            setVisibleSection('home');
-        }
-
-        function showMenu() {
-            setVisibleSection('menu');
-        }
-
-        function showOrderSummary() {
-            setVisibleSection('order-summary');
-            renderOrder();
-        }
-
-        function showPayment() {
-            setVisibleSection('payment');
-            updateTotalPrice();
-        }
-
-        function showInvoice() {
-            setVisibleSection('invoice');
-        }
-
-        function showAdminPanel() {
-            setVisibleSection('admin-panel');
-        }
-
-        // Function to show admin panel with password check
-            function showAdminPanelWithPassword() {
-                const password = prompt('Please enter the admin password:');
-                if (password === 'admin123') {
-                    showAdminPanel();
-                } else {
-                    alert('Incorrect password!');
-                }
-            }
 
 
-        // Function to show admin panel with password check
-            function showAdminPanelWithPassword() {
-                const password = prompt('Please enter the admin password:');
-                if (password === 'admin123') {
-                    showAdminPanel();
-                } else {
-                    alert('Incorrect password!');
-                }
-            }
 
 
-        // Helper function to set visible section
-        function setVisibleSection(sectionId) {
-            const sections = document.querySelectorAll('.content');
-            sections.forEach(section => {
-                section.classList.remove('visible');
-            });
-            document.getElementById(sectionId).classList.add('visible');
-        }
 
-        // Add item to order
-        function addItem(name, price) {
-            const item = { name, price, quantity: 1 };
-            const existingItem = orderItems.find(orderItem => orderItem.name === name);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                orderItems.push(item);
-            }
-            renderOrder();
-        }
 
-        // Render order items
-        function renderOrder() {
-            const orderItemsContainer = document.getElementById('order-items');
-            orderItemsContainer.innerHTML = '';
-            orderItems.forEach(item => {
-                const orderItemDiv = document.createElement('div');
-                orderItemDiv.classList.add('order-item');
-                orderItemDiv.innerHTML = `
-                    <h4>${item.name}</h4>
-                    <div class="right-side">
-                        <div>
-                            <button onclick="updateItemQuantity('${item.name}', -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateItemQuantity('${item.name}', 1)">+</button>
-                        </div>
-                        <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>
-                        <button onclick="removeItem('${item.name}')">Remove</button>
-                    </div>
-                `;
-                orderItemsContainer.appendChild(orderItemDiv);
-            });
-        }
 
-        // Update item quantity
-        function updateItemQuantity(name, quantity) {
-            const item = orderItems.find(orderItem => orderItem.name === name);
-            if (item) {
-                item.quantity += quantity;
-                if (item.quantity <= 0) {
-                    removeItem(name);
-                } else {
-                    renderOrder();
-                }
-            }
-        }
+		<section class="contactsection" id="contact">
+			<div class="container">
 
-        // Remove item from order
-        function removeItem(name) {
-            orderItems = orderItems.filter(item => item.name !== name);
-            renderOrder();
-        }
+				<h3>Get in Touch</h3>
+				<h4><strong>Ask Questions</strong> or Book an Appointment!</h4>
+				
 
-        // Update total price
-        function updateTotalPrice() {
-            const total = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
-            document.getElementById('total-price').innerText = `$${total.toFixed(2)}`;
-        }
+				<div class="contactform">
+					<form id="contactform" action="contactform/contactform.php" method="post">
+						<input type="text" name="name" placeholder="Name*" required>
+						<input type="email" name="email" placeholder="Email*" required>
+						<textarea name="message" placeholder="Write..." required></textarea>
+						<p>Booking an Appointment: Please Mention Date & Time Above. </p>
+						<br clear="all" />
+						<input type="submit" id="contactform_btn" value="Submit Message">
+					</form>
+				</div>
 
-        // Generate invoice
-        function generateInvoice() {
-            const tableNumber = prompt('Enter table number:');
-            let invoiceContent = `<h1>Invoice for Table ${tableNumber}</h1><ul>`;
-            orderItems.forEach(item => {
-                invoiceContent += `<li>${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}</li>`;
-            });
-            const total = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
-            invoiceContent += `<li>Total: $${total.toFixed(2)}</li></ul>`;
-            const invoiceWindow = window.open('', '_blank');
-            invoiceWindow.document.write(invoiceContent);
-            invoiceWindow.print();
-        }
+				
+			</div>
+		</section>
+		<!-- CONTACT -->
 
-        // Update order status in admin panel
-        function updateOrderStatus(orderId, status) {
-            alert(`Order ${orderId} status updated to: ${status}`);
-        }
-    </script>
-</body>
 
+
+
+
+
+
+
+		<section class="maparea" id="map">
+			<div class="mapheading">
+				<div class="container">
+					Find Us on Map
+				</div>
+			</div>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d50097403.94376151!2d-13.098340066429083!3d39.97039526357856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1665784479581!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</section>
+		<!-- MAP AREA -->
+
+
+
+
+
+
+
+		<footer>
+			<div class="container">
+
+
+				<div class="copyright">
+					Copyright &copy; <span id="copyrightyear"></span> FoodScoop
+				</div>
+
+
+				<div class="credits">
+					Template by <a href="https://layoutflow.com/" target="_blank" rel="nofollow">LayoutFlow</a> <br>
+				</div>
+
+				
+			</div>
+		</footer>
+		<!-- FOOTER -->
+
+
+
+		<script src="js/bliss.js"></script>
+		<script>
+			var dateobj = new Date(); var getyear = dateobj.getFullYear(); var getyeardiv = document.getElementById('copyrightyear'); getyeardiv.innerHTML = getyear;
+		</script>
+	</body>
 </html>

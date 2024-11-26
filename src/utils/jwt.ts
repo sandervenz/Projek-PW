@@ -4,7 +4,6 @@ import { ObjectId } from 'mongoose';
 
 export interface IUserToken {
   id: ObjectId;
-  roles: string[];
 }
 
 // Fungsi untuk menghasilkan token JWT

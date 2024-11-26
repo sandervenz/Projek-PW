@@ -3,10 +3,7 @@ import { encrypt } from "../utils/encryption";
 
 export interface User {
   username: string;
-  email: string;
   password: string;
-  roles: string[];
-  profilePicture: string;
   createdAt?: string;
 }
 
@@ -19,23 +16,9 @@ const UserSchema = new Schema<User>(
       required: true,
       unique: true,
     },
-    email: {
-      type: Schema.Types.String,
-      required: true,
-      unique: true,
-    },
     password: {
       type: Schema.Types.String,
       required: true,
-    },
-    roles: {
-      type: [Schema.Types.String],
-      enum: ["admin", "user"],
-      default: ["user"],
-    },
-    profilePicture: {
-      type: Schema.Types.String,
-      default: "user.jpg",
     },
   },
   {
@@ -43,18 +26,21 @@ const UserSchema = new Schema<User>(
   }
 );
 
+// Encrypt the password before saving
 UserSchema.pre("save", function (next) {
   const user = this;
   user.password = encrypt(user.password);
   next();
 });
 
+// Encrypt the password before updating
 UserSchema.pre("updateOne", async function (next) {
   const user = (this as unknown as { _update: any })._update as User;
   user.password = encrypt(user.password);
   next();
 });
 
+// Remove password from the output when converting to JSON
 UserSchema.methods.toJSON = function () {
   const user = this.toObject();
   delete user.password;

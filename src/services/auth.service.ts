@@ -4,59 +4,63 @@ import { encrypt } from "../utils/encryption";
 import { generateToken } from "../utils/jwt";
 
 interface ILoginPayload {
-  email: string;
+  username: string;
   password: string;
 }
 
 export const login = async (payload: ILoginPayload): Promise<string> => {
-  const { email, password } = payload;
-  const userByEmail = await UserModel.findOne({
-    email,
-  });
+  const { username, password } = payload;
 
-  if (!userByEmail) {
-    return Promise.reject(new Error("email: user not found"));
+  // Find user by username
+  const user = await UserModel.findOne({ username });
+
+  if (!user) {
+    return Promise.reject(new Error("username: user not found"));
   }
-  const validatePassword: boolean = encrypt(password) === userByEmail.password;
+
+  // Validate password
+  const validatePassword: boolean = encrypt(password) === user.password;
 
   if (!validatePassword) {
-    return Promise.reject(new Error("password: user not found"));
+    return Promise.reject(new Error("password: invalid credentials"));
   }
 
+  // Generate token
   const token = generateToken({
-    id: userByEmail.id,
-    roles: userByEmail.roles,
+    id: user.id
   });
 
   return token;
 };
 
 interface IRegisterPayload {
-  email: string;
   username: string;
   password: string;
-  roles: (string | undefined)[] | undefined;
 }
+
 export const register = async (payload: IRegisterPayload): Promise<User> => {
-  const { email, username, password, roles } = payload;
+  const { username, password } = payload;
+
+  // Create new user
   const user = await UserModel.create({
-    email,
-    password,
     username,
-    roles,
+    password,
   });
 
   return user;
 };
 
 export const me = async (userId: string): Promise<User> => {
+  // Fetch user profile
   const user = await UserModel.findById(userId);
   if (!user) {
     return Promise.reject(new Error("user not found"));
   }
   return user;
 };
-export const updateProfile = async (userId: ObjectId, updateUserData: User) => {
+
+export const updateProfile = async (userId: ObjectId, updateUserData: Partial<User>) => {
+  // Update user profile
   const result = await UserModel.findByIdAndUpdate(
     userId,
     {

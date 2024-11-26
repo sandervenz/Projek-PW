@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css">
+    <style>
+        /* Basic reset */
+        body,
+        h1,
+        h2,
+        h3,
+        p,
+        table,
+        select,
+        input {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .checkout-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .order-summary,
+        .table-selection,
+        .email-input,
+        .phone-number {
+            margin-bottom: 20px;
+        }
+
+        .order-summary h2,
+        .total-price h3 {
+            color: #333;
+        }
+
+        /* Styling for the input fields */
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Style for buttons */
+        .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .checkout-buttons {
+            margin-top: 20px;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .receipt-table th,
+        .receipt-table td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .receipt-total {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Print specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .modal-content,
+            .modal-content * {
+                visibility: visible;
+            }
+
+            .modal-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+
+        <div class="order-summary">
+            <h2>Order Details</h2>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="order-details">
+                    <!-- Order details will be added dynamically here -->
+                </tbody>
+            </table>
+
+            <div class="total-price">
+                <h3>Total Price: <span id="total-price">$0.00</span></h3>
+            </div>
+        </div>
+
+        <!-- Email input -->
+        <div class="email-input">
+            <h2>Enter Your Email</h2>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <p id="email-error" class="error-message"></p>
+        </div>
+
+        <!-- Phone number input -->
+        <div class="phone-number">
+            <h2>Enter Your Phone Number</h2>
+            <input type="tel" id="phone-number" placeholder="Enter your phone number" required>
+            <p id="phone-error" class="error-message"></p>
+        </div>
+
+        <div class="table-selection">
+            <h2>Select Your Table</h2>
+            <select id="table-number">
+                <option value="" disabled selected>Select Table Number</option>
+                <option value="1">Table 1</option>
+                <option value="2">Table 2</option>
+                <option value="3">Table 3</option>
+                <option value="4">Table 4</option>
+                <option value="5">Table 5</option>
+            </select>
+            <p id="table-error" class="error-message"></p>
+        </div>
+
+        <div class="checkout-buttons">
+            <button class="btn" id="confirm-order-btn">CETAK STRUCT</button>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="back-to-home">
+            <button class="btn" onclick="window.location.href='index.html';">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Modal for Digital Receipt -->
+    <div class="modal" id="receipt-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal-btn">&times;</span>
+            <h2>Transaction Receipt</h2>
+            <p><strong>Date:</strong> <span id="transaction-date"></span></p>
+            <p><strong>Table:</strong> <span id="receipt-table-number"></span></p>
+            <p><strong>Email:</strong> <span id="receipt-email"></span></p>
+            <p><strong>Phone Number:</strong> <span id="receipt-phone-number"></span></p>
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="receipt-details">
+                    <!-- Receipt details will be added dynamically -->
+                </tbody>
+            </table>
+            <div class="receipt-total">
+                <strong>Total Price:</strong> <span id="receipt-total-price"></span>
+            </div>
+            <button id="print-receipt-btn" class="btn">Print Receipt</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const order = JSON.parse(localStorage.getItem('order')) || [];
+            const totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+
+            const orderDetailsContainer = document.getElementById('order-details');
+            const totalPriceElement = document.getElementById('total-price');
+            const confirmOrderButton = document.getElementById('confirm-order-btn');
+            const tableNumberSelect = document.getElementById('table-number');
+            const tableError = document.getElementById('table-error');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone-number');
+            const emailError = document.getElementById('email-error');
+            const phoneError = document.getElementById('phone-error');
+
+            const receiptModal = document.getElementById('receipt-modal');
+            const closeModalButton = document.getElementById('close-modal-btn');
+            const receiptDetails = document.getElementById('receipt-details');
+            const receiptTotalPrice = document.getElementById('receipt-total-price');
+            const transactionDate = document.getElementById('transaction-date');
+            const receiptTableNumber = document.getElementById('receipt-table-number');
+            const receiptEmail = document.getElementById('receipt-email');
+            const receiptPhoneNumber = document.getElementById('receipt-phone-number');
+            const printReceiptButton = document.getElementById('print-receipt-btn');
+
+            // Display order details
+            order.forEach(item => {
+                const itemRow = document.createElement('tr');
+                itemRow.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${item.total.toFixed(2)}</td>
+                `;
+                orderDetailsContainer.appendChild(itemRow);
+            });
+
+            totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+
+            // Handle "CETAK STRUCT" button click
+            confirmOrderButton.addEventListener('click', () => {
+                const tableNumber = tableNumberSelect.value;
+                const email = emailInput.value;
+                const phoneNumber = phoneInput.value;
+
+                // Validate inputs
+                let valid = true;
+                if (!tableNumber) {
+                    tableError.textContent = "Please select a table number.";
+                    valid = false;
+                } else {
+                    tableError.textContent = "";
+                }
+
+                if (!email) {
+                    emailError.textContent = "Please enter a valid email.";
+                    valid = false;
+                } else {
+                    emailError.textContent = "";
+                }
+
+                if (!phoneNumber) {
+                    phoneError.textContent = "Please enter a valid phone number.";
+                    valid = false;
+                } else {
+                    phoneError.textContent = "";
+                }
+
+                if (!valid) {
+                    return;
+                }
+
+                // Populate receipt modal
+                receiptDetails.innerHTML = "";
+                order.forEach(item => {
+                    const receiptRow = document.createElement('tr');
+                    receiptRow.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>$${item.total.toFixed(2)}</td>
+                    `;
+                    receiptDetails.appendChild(receiptRow);
+                });
+
+                receiptTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
+                receiptTableNumber.textContent = `Table ${tableNumber}`;
+                receiptEmail.textContent = email;
+                receiptPhoneNumber.textContent = phoneNumber;
+                transactionDate.textContent = new Date().toLocaleString();
+
+                // Show the modal
+                receiptModal.style.display = "flex";
+            });
+
+            // Close modal
+            closeModalButton.addEventListener('click', () => {
+                receiptModal.style.display = "none";
+            });
+
+            // Print receipt when button is clicked
+            printReceiptButton.addEventListener('click', () => {
+                window.print();
+            });
+        });
+    </script>
+</body>
+
+</html>

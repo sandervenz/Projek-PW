@@ -10,6 +10,9 @@ export interface OrderItem {
 export interface Order {
   grandTotal: number;
   orderItems: OrderItem[];
+  email: string; 
+  telp: string; 
+  table: string; 
   createdBy: Types.ObjectId;
   status: "pending" | "completed" | "cancelled";
   createdAt?: string;
@@ -32,7 +35,20 @@ const OrderSchema = new Schema<Order>(
         quantity: { type: Schema.Types.Number, required: true, min: 1, max: 5 },
       },
     ],
-    createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    email: {
+      type: Schema.Types.String,
+      required: false,
+      match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address"],
+    },
+    telp: {
+      type: Schema.Types.String,
+      required: false,
+    },
+    table: {
+      type: Schema.Types.String,
+      required: true,
+    },
+    createdBy: { type: Schema.Types.ObjectId, ref: "User", required: false },
     status: {
       type: Schema.Types.String,
       enum: ["pending", "completed", "cancelled"],

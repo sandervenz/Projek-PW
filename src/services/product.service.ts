@@ -1,7 +1,3 @@
-/**
- * src/services/product.service.ts
- */
-
 import ProductsModel, { Product } from "../models/products.model";
 
 export const create = async (payload: Product): Promise<Product> => {

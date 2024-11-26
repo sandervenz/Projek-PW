@@ -5,7 +5,6 @@ export interface Product {
   description: string;
   images: string[];
   price: number;
-  qty: number;
   createdAt: string;
   updatedAt: string;
   _id?: Types.ObjectId;
@@ -30,11 +29,6 @@ const ProductsSchema = new Schema<Product>(
     price: {
       type: Schema.Types.Number,
       required: true,
-    },
-    qty: {
-      type: Schema.Types.Number,
-      required: true,
-      min: [1, "Minimal qty adalah 1"],
     },
   },
   {
