@@ -47,7 +47,7 @@ export default {
       const err = error as Error;
       res.status(500).json({
         data: null,
-        message: err.message,
+        message: "Username or Password are invalid",
       });
     }
   },

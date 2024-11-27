@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/jsonwebtoken": "^9.0.6"
+    "@types/jsonwebtoken": "^9.0.6",
+    "http-server": "^14.1.1"
   }
 }

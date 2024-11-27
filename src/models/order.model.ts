@@ -2,7 +2,6 @@ import mongoose, { Types } from "mongoose";
 
 export interface OrderItem {
   name: string;
-  productId: Types.ObjectId;
   price: number;
   quantity: number;
 }
@@ -30,7 +29,6 @@ const OrderSchema = new Schema<Order>(
     orderItems: [
       {
         name: { type: Schema.Types.String, required: true },
-        productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
         price: { type: Schema.Types.Number, required: true },
         quantity: { type: Schema.Types.Number, required: true, min: 1, max: 5 },
       },

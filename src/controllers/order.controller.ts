@@ -13,12 +13,11 @@ async function createOrder(req: Request, res: Response) {
 
     let grandTotal = 0;
 
+    // Proses item pesanan tanpa validasi `productId`
     for (const item of orderItems) {
-      const product = await ProductModel.findById(item.productId);
-      if (!product) {
-        return res.status(404).json({ message: `Product not found: ${item.productId}` });
-      }
-      grandTotal += item.price * item.quantity;
+      const price = item.price || 0; 
+      const total = price * item.quantity;
+      grandTotal += total;
     }
 
     const newOrder = new OrderModel({
@@ -32,6 +31,7 @@ async function createOrder(req: Request, res: Response) {
 
     const savedOrder = await newOrder.save();
 
+    // Kirim email jika email tersedia
     if (email) {
       const emailContent = await mail.render('invoice.ejs', {
         customerEmail: email,

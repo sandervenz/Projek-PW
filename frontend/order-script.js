@@ -73,7 +73,7 @@ function attachEventListeners() {
                 const price = parseFloat(item.getAttribute('data-price'));
                 const name = item.querySelector('h2').textContent;
                 if (quantity > 0) {
-                    order.push({ name, quantity, price, total: quantity * price }); // Tambahkan 'price'
+                    order.push({ name, quantity, price, total: quantity * price });
                 }
                 totalPrice += quantity * price;
             });
