@@ -4,7 +4,7 @@ import { DATABASE_URL } from "./env";
 const connect = async () => {
   try {
     await mongoose.connect(DATABASE_URL, {
-      dbName: "Projek-SteakHouse",
+      dbName: "Projek-FoodScoop",
       // Increase timeouts for connection and socket
       connectTimeoutMS: 30000,  
       socketTimeoutMS: 45000,  

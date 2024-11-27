@@ -19,8 +19,8 @@ async function loadMenu() {
                 itemElement.innerHTML = `
                     <img src="${item.images || 'default-image.jpg'}" alt="${item.name}">
                     <h6>${item.category}</h6>
-                    <h2>${item.name}</h2>
-                    <h6>${item.description}</h6>
+                    <h5>${item.name}</h5>
+                    <p>${item.description}</p>
                     <p>Price: $${item.price}</p>
                     <div class="order-controls">
                         <button class="subtract-btn">-</button>

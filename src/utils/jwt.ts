@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
 import { SECRET } from "./env";
-import { ObjectId } from 'mongoose';
 
 export interface IUserToken {
-  id: ObjectId;
+  username: string;
 }
 
 // Fungsi untuk menghasilkan token JWT

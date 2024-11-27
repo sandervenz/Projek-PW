@@ -26,7 +26,7 @@ export const login = async (payload: ILoginPayload): Promise<string> => {
 
   // Generate token
   const token = generateToken({
-    id: user.id
+    username: user.username
   });
 
   return token;
