@@ -7,9 +7,13 @@ import {
   errorNotFoundMiddleware,
   errorServerMiddleware,
 } from "./middlewares/error.middleware";
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Enable CORS for all routes and origins (you can adjust it as needed)
+app.use(cors());
 
 db();
 

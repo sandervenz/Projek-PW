@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pesanan</title>
+    <style>
+        /* Gaya CSS untuk merapikan tampilan */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        #order-summary {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #order-summary h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        select {
+            padding: 8px;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .status {
+            margin-top: 10px;
+        }
+
+        .status label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Daftar Pesanan</h1>
+    <table id="order-list-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Kuantitas</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="order-list-details">
+            <!-- Rincian pesanan akan ditambahkan di sini secara dinamis -->
+        </tbody>
+    </table>
+
+    <div id="order-summary">
+        <h3>Total Harga: $<span id="order-total-price">0.00</span></h3>
+        <p><strong>Meja:</strong> <span id="order-table-number"></span></p>
+        <p><strong>Email:</strong> <span id="order-email"></span></p>
+        <p><strong>Nomor Telepon:</strong> <span id="order-phone-number"></span></p>
+
+        <!-- Status Pilihan -->
+        <div class="status">
+            <label for="order-status">Status Pesanan:</label>
+            <select id="order-status">
+                <option value="pending">Pending</option>
+                <option value="canceled">Canceled</option>
+                <option value="completed">Completed</option>
+            </select>
+            <p id="status-message" style="margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mengambil data dari localStorage
+            const orderData = JSON.parse(localStorage.getItem('orderData')) || {};
+            const orderDetails = orderData.orderDetails || [];
+            const totalPrice = orderData.totalPrice || 0;
+
+            // Menampilkan rincian pesanan
+            const orderListDetails = document.getElementById('order-list-details');
+            orderDetails.forEach(item => {
+                const itemRow = document.createElement('tr');
+                itemRow.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>Rp${item.total.toFixed(2)}</td>
+                `;
+                orderListDetails.appendChild(itemRow);
+            });
+
+            // Menampilkan total harga
+            const orderTotalPrice = document.getElementById('order-total-price');
+            orderTotalPrice.textContent = totalPrice.toFixed(2);
+
+            // Menampilkan informasi lainnya
+            document.getElementById('order-table-number').textContent = orderData.tableNumber || 'N/A';
+            document.getElementById('order-email').textContent = orderData.email || 'N/A';
+            document.getElementById('order-phone-number').textContent = orderData.phoneNumber || 'N/A';
+
+            // Menambahkan event listener untuk status pilihan
+            const orderStatusSelect = document.getElementById('order-status');
+            const statusMessage = document.getElementById('status-message');
+
+            orderStatusSelect.addEventListener('change', () => {
+                const selectedStatus = orderStatusSelect.value;
+
+                // Menampilkan pesan status sesuai pilihan
+                switch (selectedStatus) {
+                    case 'pending':
+                        statusMessage.textContent = 'Pesanan sedang menunggu konfirmasi.';
+                        statusMessage.style.color = 'orange';
+                        break;
+                    case 'canceled':
+                        statusMessage.textContent = 'Pesanan telah dibatalkan.';
+                        statusMessage.style.color = 'red';
+                        break;
+                    case 'completed':
+                        statusMessage.textContent = 'Pesanan telah selesai.';
+                        statusMessage.style.color = 'green';
+                        break;
+                    default:
+                        statusMessage.textContent = '';
+                        break;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

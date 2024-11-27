@@ -190,17 +190,17 @@
             </div>
         </div>
 
-        <!-- Email input -->
+        <!-- Email input (optional) -->
         <div class="email-input">
-            <h2>Enter Your Email</h2>
-            <input type="email" id="email" placeholder="Enter your email" required>
+            <h2>Enter Your Email (Optional)</h2>
+            <input type="email" id="email" placeholder="Enter your email">
             <p id="email-error" class="error-message"></p>
         </div>
 
-        <!-- Phone number input -->
+        <!-- Phone number input (optional) -->
         <div class="phone-number">
-            <h2>Enter Your Phone Number</h2>
-            <input type="tel" id="phone-number" placeholder="Enter your phone number" required>
+            <h2>Enter Your Phone Number (Optional)</h2>
+            <input type="tel" id="phone-number" placeholder="Enter your phone number">
             <p id="phone-error" class="error-message"></p>
         </div>
 
@@ -218,7 +218,7 @@
         </div>
 
         <div class="checkout-buttons">
-            <button class="btn" id="confirm-order-btn">CETAK STRUCT</button>
+            <button class="btn" id="confirm-order-btn">PLACE YOUR ORDER</button>
         </div>
 
         <!-- Back to Home Button -->
@@ -231,7 +231,7 @@
     <div class="modal" id="receipt-modal">
         <div class="modal-content">
             <span class="close-btn" id="close-modal-btn">&times;</span>
-            <h2>Transaction Receipt</h2>
+            <h2>Order Confirmation</h2>
             <p><strong>Date:</strong> <span id="transaction-date"></span></p>
             <p><strong>Table:</strong> <span id="receipt-table-number"></span></p>
             <p><strong>Email:</strong> <span id="receipt-email"></span></p>
@@ -241,6 +241,7 @@
                     <tr>
                         <th>Item</th>
                         <th>Quantity</th>
+                        <th>Price</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -251,114 +252,21 @@
             <div class="receipt-total">
                 <strong>Total Price:</strong> <span id="receipt-total-price"></span>
             </div>
-            <button id="print-receipt-btn" class="btn">Print Receipt</button>
+            <button id="print-receipt-btn" class="btn">Confirm Order</button>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const order = JSON.parse(localStorage.getItem('order')) || [];
-            const totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+    <!-- Modal for Order Completion -->
+    <div class="modal" id="order-completed-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-order-completed-btn">&times;</span>
+            <h2>Order Completed!</h2>
+            <p>Your order has been successfully placed.</p>
+            <button id="back-to-home-btn" class="btn">Back to Your Order</button>
+        </div>
+    </div>
 
-            const orderDetailsContainer = document.getElementById('order-details');
-            const totalPriceElement = document.getElementById('total-price');
-            const confirmOrderButton = document.getElementById('confirm-order-btn');
-            const tableNumberSelect = document.getElementById('table-number');
-            const tableError = document.getElementById('table-error');
-            const emailInput = document.getElementById('email');
-            const phoneInput = document.getElementById('phone-number');
-            const emailError = document.getElementById('email-error');
-            const phoneError = document.getElementById('phone-error');
-
-            const receiptModal = document.getElementById('receipt-modal');
-            const closeModalButton = document.getElementById('close-modal-btn');
-            const receiptDetails = document.getElementById('receipt-details');
-            const receiptTotalPrice = document.getElementById('receipt-total-price');
-            const transactionDate = document.getElementById('transaction-date');
-            const receiptTableNumber = document.getElementById('receipt-table-number');
-            const receiptEmail = document.getElementById('receipt-email');
-            const receiptPhoneNumber = document.getElementById('receipt-phone-number');
-            const printReceiptButton = document.getElementById('print-receipt-btn');
-
-            // Display order details
-            order.forEach(item => {
-                const itemRow = document.createElement('tr');
-                itemRow.innerHTML = `
-                    <td>${item.name}</td>
-                    <td>${item.quantity}</td>
-                    <td>$${item.total.toFixed(2)}</td>
-                `;
-                orderDetailsContainer.appendChild(itemRow);
-            });
-
-            totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
-
-            // Handle "CETAK STRUCT" button click
-            confirmOrderButton.addEventListener('click', () => {
-                const tableNumber = tableNumberSelect.value;
-                const email = emailInput.value;
-                const phoneNumber = phoneInput.value;
-
-                // Validate inputs
-                let valid = true;
-                if (!tableNumber) {
-                    tableError.textContent = "Please select a table number.";
-                    valid = false;
-                } else {
-                    tableError.textContent = "";
-                }
-
-                if (!email) {
-                    emailError.textContent = "Please enter a valid email.";
-                    valid = false;
-                } else {
-                    emailError.textContent = "";
-                }
-
-                if (!phoneNumber) {
-                    phoneError.textContent = "Please enter a valid phone number.";
-                    valid = false;
-                } else {
-                    phoneError.textContent = "";
-                }
-
-                if (!valid) {
-                    return;
-                }
-
-                // Populate receipt modal
-                receiptDetails.innerHTML = "";
-                order.forEach(item => {
-                    const receiptRow = document.createElement('tr');
-                    receiptRow.innerHTML = `
-                        <td>${item.name}</td>
-                        <td>${item.quantity}</td>
-                        <td>$${item.total.toFixed(2)}</td>
-                    `;
-                    receiptDetails.appendChild(receiptRow);
-                });
-
-                receiptTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
-                receiptTableNumber.textContent = `Table ${tableNumber}`;
-                receiptEmail.textContent = email;
-                receiptPhoneNumber.textContent = phoneNumber;
-                transactionDate.textContent = new Date().toLocaleString();
-
-                // Show the modal
-                receiptModal.style.display = "flex";
-            });
-
-            // Close modal
-            closeModalButton.addEventListener('click', () => {
-                receiptModal.style.display = "none";
-            });
-
-            // Print receipt when button is clicked
-            printReceiptButton.addEventListener('click', () => {
-                window.print();
-            });
-        });
-    </script>
+    <script src="checkout.js"></script>
 </body>
 
 </html>

@@ -162,6 +162,26 @@
         .order-now-container {
             display: none;
         }
+
+        /* List Pesanan Button */
+        .list-pesanan-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .list-pesanan-btn {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .list-pesanan-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
@@ -202,6 +222,14 @@
             </form>
         </div>
     </section>
+
+<!-- Button to show the list of orders -->
+<div class="list-pesanan-container">
+    <a href="order-list.html" class="list-pesanan-btn">
+        Show Order List
+    </a>
+</div>
+
 
     <script>
         let editingIndex = null;
@@ -245,6 +273,10 @@
                 `;
                 menuItemsList.appendChild(itemDiv);
             });
+        }
+
+        function showOrderList() {
+            alert('This will show the list of orders in the future.');
         }
 
         function handleSubmit() {
