@@ -7,7 +7,7 @@ function loadMenuItems() {
     menuItemsList.innerHTML = '';
 
     // Fetch menu items from the backend
-    fetch('http://localhost:3000/menu/products')
+    fetch('https://web-foodscoop-api.vercel.app/menu/products')
         .then(response => response.json())
         .then(data => {
             if (data.message === "Success get all products" && Array.isArray(data.data)) {
@@ -93,7 +93,7 @@ async function addMenuItem() {
 
     try {
         // Kirim data ke backend menggunakan method POST
-        const response = await fetch('http://localhost:3000/menu/products', {
+        const response = await fetch('https://web-foodscoop-api.vercel.app/menu/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ async function updateMenuItem() {
 
     try {
         // Kirim permintaan PUT untuk memperbarui item menu
-        const response = await fetch(`http://localhost:3000/menu/products/${editingIndex}`, {
+        const response = await fetch(`https://web-foodscoop-api.vercel.app/menu/products/${editingIndex}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ async function deleteMenuItem(itemId) {
 
     try {
         // Kirim permintaan DELETE ke backend
-        const response = await fetch(`http://localhost:3000/menu/products/${itemId}`, {
+        const response = await fetch(`https://web-foodscoop-api.vercel.app/menu/products/${itemId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}` // Tambahkan token di header
@@ -195,7 +195,7 @@ function editMenuItem(itemId) {
     console.log("Editing item with ID:", itemId); // Debugging untuk memastikan ID benar
 
     // Ambil data menu berdasarkan ID
-    fetch(`http://localhost:3000/menu/products/${itemId}`)
+    fetch(`https://web-foodscoop-api.vercel.app/menu/products/${itemId}`)
         .then(response => response.json())
         .then(responseData => {
             console.log('Response data received:', responseData); // Debugging untuk melihat data yang diterima

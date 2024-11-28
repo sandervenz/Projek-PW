@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch menu products
-    fetch('http://localhost:3000/menu/products')
+    fetch('https://web-foodscoop-api.vercel.app/menu/products')
         .then(response => response.json())
         .then(products => {
             console.log('Menu Products:', products);
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 // POST order ke server
-                fetch('http://localhost:3000/menu/orders', { 
+                fetch('https://web-foodscoop-api.vercel.app/menu/orders', { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

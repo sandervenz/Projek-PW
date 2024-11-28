@@ -1,7 +1,7 @@
 // Function to load the menu items from the backend
 async function loadMenu() {
     try {
-        const response = await fetch('http://localhost:3000/menu/products'); // Fetching data from backend
+        const response = await fetch('https://web-foodscoop-api.vercel.app/menu/products'); // Fetching data from backend
         const data = await response.json(); // Parse the JSON response
 
         if (response.ok && data && data.data) {

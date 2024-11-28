@@ -5,7 +5,7 @@ async function login() {
 
     try {
         // Kirim POST request ke server untuk login
-        const response = await fetch('http://localhost:3000/menu/auth/login', {
+        const response = await fetch('https://web-foodscoop-api.vercel.app/menu/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

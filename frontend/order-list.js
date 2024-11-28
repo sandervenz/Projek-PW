@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Fungsi untuk mengubah status order
     function updateOrderStatus(orderId, newStatus) {
-        fetch(`http://localhost:3000/menu/orders/${orderId}/status`, {
+        fetch(`https://web-foodscoop-api.vercel.app/menu/orders/${orderId}/status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Mengambil data order dari API
-    fetch('http://localhost:3000/menu/orders', {
+    fetch('https://web-foodscoop-api.vercel.app/menu/orders', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

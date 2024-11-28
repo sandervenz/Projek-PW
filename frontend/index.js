@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
             // Kirim POST request ke backend
-            const response = await fetch("http://localhost:3000/menu/feedback", {
+            const response = await fetch("https://web-foodscoop-api.vercel.app/menu/feedback", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
