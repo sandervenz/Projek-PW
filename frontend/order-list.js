@@ -90,16 +90,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mengambil data order dari API
     fetch('http://localhost:3000/menu/orders', {
         method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
     })
         .then(response => response.json())
         .then(data => {
             if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
-                const orders = data.data;
-
+                let orders = data.data;
+    
+                // Urutkan orders berdasarkan createdAt dari yang terbaru ke yang terlama
+                orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    
+                // Tampilkan orders di daftar
                 orders.forEach(order => {
                     const orderRow = document.createElement('tr');
                     orderRow.classList.add('order-item');
@@ -112,15 +116,16 @@ document.addEventListener("DOMContentLoaded", function () {
                             <button class="view-details-btn" data-id="${order._id}">View Details</button>
                         </td>
                     `;
-
+    
                     orderListContainer.appendChild(orderRow);
                 });
-
+    
+                // Tambahkan event listener untuk setiap tombol "View Details"
                 document.querySelectorAll('.view-details-btn').forEach(button => {
                     button.addEventListener('click', function (e) {
                         const orderId = e.target.getAttribute('data-id');
                         const selectedOrder = orders.find(order => order._id === orderId);
-
+    
                         if (selectedOrder) {
                             displayOrderDetails(selectedOrder);
                             displayOrderItems(selectedOrder.orderItems);
@@ -133,5 +138,5 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => {
             console.error('Error fetching orders:', error);
-        });
+        });    
 });

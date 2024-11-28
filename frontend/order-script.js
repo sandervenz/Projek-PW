@@ -55,7 +55,7 @@ function attachEventListeners() {
         const quantityInput = item.querySelector('.quantity');
         const totalPriceElement = item.querySelector('.total-price');
         const pricePerItem = parseFloat(item.getAttribute('data-price'));
-        const itemName = item.querySelector('h2').textContent;
+        const itemName = item.querySelector('h5').textContent;
 
         // Update total price per item
         function updateItemTotalPrice() {
@@ -71,7 +71,7 @@ function attachEventListeners() {
             items.forEach((item) => {
                 const quantity = parseInt(item.querySelector('.quantity').value);
                 const price = parseFloat(item.getAttribute('data-price'));
-                const name = item.querySelector('h2').textContent;
+                const name = item.querySelector('h5').textContent;
                 if (quantity > 0) {
                     order.push({ name, quantity, price, total: quantity * price });
                 }

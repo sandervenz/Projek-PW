@@ -62,7 +62,6 @@
 
 		<script src="js/jquery.js"></script>
 		<script src="js/scripts.js"></script>
-		<script src="contactform/contactform.js"></script>
 		<script src="js/menuscript.js"></script>
 	</head>
 
@@ -215,31 +214,25 @@
 		</section>
 		<!-- ABOUT -->
 
-    </div>
-</section>
-
 
 		<section class="contactsection" id="contact">
 			<div class="container">
-
 				<h3>Get in Touch</h3>
 				<h4><strong>Ask Questions</strong> or Book an Appointment!</h4>
-				
 
 				<div class="contactform">
-					<form id="contactform" action="contactform/contactform.php" method="post">
-						<input type="text" name="name" placeholder="Name*" required>
-						<input type="email" name="email" placeholder="Email*" required>
-						<textarea name="message" placeholder="Write..." required></textarea>
-						<p>Booking an Appointment: Please Mention Date & Time Above. </p>
+					<form id="contactform">
+						<input type="text" id="name" name="name" placeholder="Name*" required>
+						<input type="email" id="email" name="email" placeholder="Email*" required>
+						<textarea id="message" name="message" placeholder="Write..." required></textarea>
+						<p>Booking an Appointment: Please Mention Date & Time Above.</p>
 						<br clear="all" />
 						<input type="submit" id="contactform_btn" value="Submit Message">
 					</form>
 				</div>
-
-				
 			</div>
 		</section>
+
 		<!-- CONTACT -->
 
 
@@ -260,6 +253,7 @@
 
 
 		<script src="js/bliss.js"></script>
+		<script src="index.js"></script>
 		<script>
 			var dateobj = new Date(); var getyear = dateobj.getFullYear(); var getyeardiv = document.getElementById('copyrightyear'); getyeardiv.innerHTML = getyear;
 		</script>
