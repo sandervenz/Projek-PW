@@ -192,37 +192,40 @@ async function deleteMenuItem(itemId) {
 }
 
 function editMenuItem(itemId) {
-    console.log("Editing item with ID:", itemId); // Untuk memastikan ID yang dikirimkan benar
+    console.log("Editing item with ID:", itemId); // Debugging untuk memastikan ID benar
 
     // Ambil data menu berdasarkan ID
     fetch(`http://localhost:3000/menu/products/${itemId}`)
         .then(response => response.json())
-        .then(data => {
-            console.log('Data received:', data); // Untuk melihat data yang diterima
+        .then(responseData => {
+            console.log('Response data received:', responseData); // Debugging untuk melihat data yang diterima
 
-            if (data) {
-                // Isi form dengan data yang diterima dari backend
-                document.getElementById('itemName').value = data.name;  // Isi dengan nama
-                document.getElementById('itemCategory').value = data.category;  // Isi dengan kategori
-                document.getElementById('itemPrice').value = data.price;  // Isi dengan harga
-                document.getElementById('itemImage').value = data.images;  // Isi dengan gambar
-                document.getElementById('itemDescription').value = data.description;  // Isi dengan deskripsi
+            if (responseData.message === "Success get one product" && responseData.data) {
+                const data = responseData.data; // Ambil detail item menu dari properti `data`
 
-                // Ubah tombol menjadi "Update Item" setelah pengeditan
+                // Isi form dengan data dari backend
+                document.getElementById('itemName').value = data.name || ""; 
+                document.getElementById('itemCategory').value = data.category || ""; 
+                document.getElementById('itemPrice').value = data.price || ""; 
+                document.getElementById('itemImage').value = data.images || ""; 
+                document.getElementById('itemDescription').value = data.description || ""; 
+
+                // Ubah tombol submit menjadi "Update Item"
                 document.getElementById('submitButton').innerText = 'Update Item';
 
-                // Set nilai global untuk editing
+                // Set `editingIndex` ke ID item yang sedang diedit
                 editingIndex = itemId;
             } else {
-                console.error('Data menu tidak ditemukan');
-                alert('Item tidak ditemukan!');
+                console.error('Data menu tidak ditemukan atau struktur data tidak sesuai.');
+                alert('Menu item tidak ditemukan!');
             }
         })
         .catch(error => {
             console.error('Error fetching menu item:', error);
-            alert('Terjadi kesalahan saat mengambil data.');
+            alert('Terjadi kesalahan saat mengambil data. Silakan coba lagi.');
         });
 }
+
 
 function resetForm() {
     editingIndex = null;
