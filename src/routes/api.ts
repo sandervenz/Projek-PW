@@ -6,6 +6,7 @@ import authController from "../controllers/auth.controller";
 import authMiddleware from "../middlewares/auth.middleware";
 import { createOrder, findAllOrders } from "../controllers/order.controller";
 import { changeOrderStatus } from '../controllers/status.controller';
+import { feedbackController } from '../controllers/feedback.controller';
 
 const router = express.Router();
 
@@ -26,8 +27,11 @@ router.post("/auth/register", authController.register);
 
 // Order routes
 router.post("/orders", createOrder);
-router.get("/orders", findAllOrders);
+router.get("/orders", authMiddleware, findAllOrders);
 // Status order
 router.patch('/orders/:id/status', authMiddleware, changeOrderStatus);
+
+// POST feedback
+router.post('/feedback', feedbackController.createFeedback);
 
 export default router;
