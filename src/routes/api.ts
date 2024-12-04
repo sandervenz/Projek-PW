@@ -5,8 +5,8 @@ import productsController from "../controllers/products.controller";
 import authController from "../controllers/auth.controller";
 import authMiddleware from "../middlewares/auth.middleware";
 import { createOrder, findAllOrders } from "../controllers/order.controller";
-import { changeOrderStatus } from '../controllers/status.controller';
-import { feedbackController } from '../controllers/feedback.controller';
+import changeOrderStatus from '../controllers/status.controller';
+import feedbackController from '../controllers/feedback.controller';
 
 const router = express.Router();
 

@@ -36,4 +36,4 @@ async function changeOrderStatus(req: Request, res: Response) {
   }
 }
 
-export { changeOrderStatus };
+export default changeOrderStatus;

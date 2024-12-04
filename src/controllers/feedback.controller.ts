@@ -20,4 +20,6 @@ class FeedbackController {
     }
 }
 
-export const feedbackController = new FeedbackController();
+const feedbackController = new FeedbackController();
+
+export default feedbackController;
