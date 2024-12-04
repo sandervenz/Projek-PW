@@ -1,5 +1,4 @@
 import OrderModel, { Order } from "../models/order.model";
-import ProductsModel from "../models/products.model";
 
 export const createOrder = async (payload: Order): Promise<Order> => {
 
