@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import * as Yup from "yup";
 import { login, register } from "../services/auth.service";
 

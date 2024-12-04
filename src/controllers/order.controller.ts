@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import OrderModel from '../models/order.model';
-import ProductModel from '../models/products.model';
 import mail from '../utils/mail';
 
 async function createOrder(req: Request, res: Response) {
