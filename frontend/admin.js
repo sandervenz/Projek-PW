@@ -17,7 +17,6 @@ async function login() {
         const data = await response.json();
 
         if (response.ok) {
-            // Simpan token ke localStorage jika login berhasil
             localStorage.setItem('authToken', data.data);
 
             // Redirect ke halaman admin atau dashboard
