@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     email: emailInput.value,
                     telp: phoneInput.value,
                     table: tableNumberSelect.value,
-                    status: 'pending', // Status pesanan sementara
+                    status: 'pending',
                 };
 
                 // POST order ke server

@@ -107,7 +107,7 @@ function attachEventListeners() {
             localStorage.setItem('order', JSON.stringify(order));
             localStorage.setItem('totalPrice', totalPrice.toFixed(2));
             console.log('Order saved to localStorage:', order); // Debugging
-            window.location.href = 'checkout.html'; // Navigate to the checkout page
+            window.location.href = 'checkout.html';
         });
     }
 }
