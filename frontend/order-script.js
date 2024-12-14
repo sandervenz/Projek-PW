@@ -20,7 +20,7 @@ async function loadMenu() {
                     <img src="${item.images || 'default-image.jpg'}" alt="${item.name}">
                     <h6>${item.category}</h6>
                     <h5>${item.name}</h5>
-                    <p>${item.description}</p><br>
+                    <p>${item.description}</p>
                     <p><strong>Rp${item.price}</strong></p>
                     <div class="order-controls">
                         <button class="subtract-btn">-</button>
@@ -52,16 +52,9 @@ function attachEventListeners() {
         const addButton = item.querySelector('.add-btn');
         const subtractButton = item.querySelector('.subtract-btn');
         const quantityInput = item.querySelector('.quantity');
-        const totalPriceElement = item.querySelector('.total-price');
-        const pricePerItem = parseFloat(item.getAttribute('data-price'));
-        const itemName = item.querySelector('h5').textContent;
-
+ 
         // Update total price per item
-        function updateItemTotalPrice() {
-            let quantity = parseInt(quantityInput.value);
-            let itemTotal = pricePerItem * quantity;
-            totalPriceElement.textContent = `Total: Rp${itemTotal}`;
-        }
+        function updateItemTotalPrice() {}
 
         // Update overall total price
         function updateOverallTotalPrice() {
