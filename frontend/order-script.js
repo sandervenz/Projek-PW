@@ -1,7 +1,7 @@
 // Function to load the menu items from the backend
 async function loadMenu() {
     try {
-        const response = await fetch('http://localhost:3000/menu/products'); // Fetching data from backend
+        const response = await fetch('https://web-foodscoop-api.vercel.app/menu/products'); // Fetching data from backend
         const data = await response.json(); // Parse the JSON response
 
         if (response.ok && data && data.data) {
@@ -20,14 +20,13 @@ async function loadMenu() {
                     <img src="${item.images || 'default-image.jpg'}" alt="${item.name}">
                     <h6>${item.category}</h6>
                     <h5>${item.name}</h5>
-                    <p>${item.description}</p>
-                    <p>Price: $${item.price}</p>
+                    <p>${item.description}</p><br>
+                    <p><strong>Rp${item.price}</strong></p>
                     <div class="order-controls">
                         <button class="subtract-btn">-</button>
                         <input type="text" class="quantity" value="0" readonly>
                         <button class="add-btn">+</button>
                     </div>
-                    <p class="total-price">Total: $0.00</p>
                 `;
 
                 menuWrap.appendChild(itemElement);
@@ -61,7 +60,7 @@ function attachEventListeners() {
         function updateItemTotalPrice() {
             let quantity = parseInt(quantityInput.value);
             let itemTotal = pricePerItem * quantity;
-            totalPriceElement.textContent = `Total: $${itemTotal.toFixed(2)}`;
+            totalPriceElement.textContent = `Total: Rp${itemTotal}`;
         }
 
         // Update overall total price
@@ -77,7 +76,7 @@ function attachEventListeners() {
                 }
                 totalPrice += quantity * price;
             });
-            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+            document.getElementById('total-price').textContent = totalPrice;
         }
 
         // Add item quantity
