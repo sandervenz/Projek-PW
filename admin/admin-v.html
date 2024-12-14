@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>FoodScoop - Food & Restaurant Template</title>
+
+    <link rel="icon" type="image/png" href="../frontend/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../frontend/fonts/icons-linear.css">
+    <link rel="stylesheet" href="../frontend/fonts/icons-fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../frontend/style.css">
+    <link rel="stylesheet" href="../frontend/style-responsive.css">
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #444;
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #333;
+            padding: 20px;
+        }
+
+        .site-branding a img {
+            max-width: 150px;
+        }
+
+        /* Food Menu Section */
+        .foodmenu {
+            padding: 50px 0;
+        }
+
+        .menuitems_wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 30%;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .item-info {
+            padding: 15px;
+        }
+
+        .item-info h6 {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .item-info h5 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+        }
+
+        .item-info p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #777;
+        }
+
+        /* Edit/Delete Buttons Styling */
+        .item-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 0;
+            background-color: #f1f1f1;
+        }
+
+        .item-actions button {
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .item-actions .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .item-actions .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .item-actions .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .item-actions .delete-btn:hover {
+            background-color: #e53935;
+        }
+
+        /* Add Item Form */
+        .order-form {
+            background-color: #fff;
+            padding: 30px;
+            margin: 50px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-form input,
+        .order-form textarea,
+        .order-form button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .order-form button {
+            background-color: #f44336;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .order-form button:hover {
+            background-color: #e53935;
+        }
+
+        /* Remove the Order Now Button */
+        .order-now-container {
+            display: none;
+        }
+
+        /* List Pesanan Button */
+        .list-pesanan-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .list-pesanan-btn {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .list-pesanan-btn:hover {
+            background-color: #45a049;
+        }
+
+        .add-item-btn {
+            background-color: orange;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-item-btn:hover {
+            background-color: #e67e22;
+        }
+
+    </style>
+</head>
+
+<body id="home">
+    <header>
+        <div class="container psr">
+            <div class="header_default">
+                <div class="site-branding">
+                    <a href="admin-v.html" class="logo">
+                        <img src="../frontend/images/food-scoop-logo-white.png" alt="" class="logo-1">
+                        <img src="../frontend/images/food-scoop-logo.png" alt="" class="logo-2">
+                    </a>
+                </div>
+                <!-- Tambahkan Sign Out Button -->
+                <div style="position: absolute; right: 20px; top: 20px;">
+                    <button id="signOutBtn" style="color: red; background: none; border: none; font-size: 16px; cursor: pointer;">SIGN OUT</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="foodmenu" id="foodmenu">
+        <div class="container">
+            <h3>Menu</h3>
+            <div class="menuitems_wrap" id="menuItemsList">
+                <!-- Menu items will be dynamically loaded here -->
+            </div>
+        </div>      
+    </section>
+
+    <div class="add-item-container" style="text-align: center; margin: 20px 0;">
+        <button class="add-item-btn" onclick="scrollToOrderForm()">Add Item</button>
+    </div>  
+
+    <section class="order-form">
+        <div class="container">
+            <h3>Add/Edit Menu</h3>
+            <form id="menuItemForm">
+                <input type="text" id="itemName" placeholder="Item Name" required>
+                <input type="text" id="itemCategory" placeholder="Category (e.g., Breakfast)" required>
+                <input type="number" id="itemPrice" placeholder="Price" required>
+                <input type="text" id="itemImage" placeholder="Image URL" required>
+                <textarea id="itemDescription" placeholder="Description" rows="4" required></textarea>
+                <button type="button" id="submitButton" onclick="handleSubmit()">Add Item</button>
+            </form>
+        </div>
+    </section>
+
+<!-- Button to show the list of orders -->
+<div class="list-pesanan-container">
+    <a href="order-list.html" class="list-pesanan-btn">
+        Show Order List
+    </a>
+</div>
+
+
+    <script src="admin-v.js"></script>
+</body>
+
+</html>
