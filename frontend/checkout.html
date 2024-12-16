@@ -55,6 +55,7 @@
         }
 
         /* Styling for the input fields */
+        input[type="name"],
         input[type="email"],
         input[type="tel"],
         select {
@@ -190,16 +191,23 @@
             </div>
         </div>
 
-        <!-- Email input (optional) -->
+        <!-- Name input -->
+        <div class="name-input">
+            <h2>Name</h2>
+            <input type="name" id="name" placeholder="Enter your name">
+            <p id="name-error" class="error-message"></p>
+        </div><br>
+
+        <!-- Email input -->
         <div class="email-input">
-            <h2>Enter Your Email</h2>
+            <h2>Email</h2>
             <input type="email" id="email" placeholder="Enter your email">
             <p id="email-error" class="error-message"></p>
         </div>
 
-        <!-- Phone number input (optional) -->
+        <!-- Phone number input -->
         <div class="phone-number">
-            <h2>Enter Your Phone Number</h2>
+            <h2>Phone Number</h2>
             <input type="tel" id="phone-number" placeholder="Enter your phone number">
             <p id="phone-error" class="error-message"></p>
         </div>
@@ -207,7 +215,7 @@
         <div class="table-selection">
             <h2>Select Your Table</h2>
             <select id="table-number">
-                <option value="" disabled selected>Select Table Number</option>
+                <option value="" disabled selected>Table Number</option>
                 <option value="1">Table 1</option>
                 <option value="2">Table 2</option>
                 <option value="3">Table 3</option>
@@ -239,6 +247,7 @@
             <h2>Order Confirmation</h2>
             <p><strong>Date:</strong> <span id="transaction-date"></span></p>
             <p><strong>Table:</strong> <span id="receipt-table-number"></span></p>
+            <p><strong>Name:</strong> <span id="receipt-name"></span></p>
             <p><strong>Email:</strong> <span id="receipt-email"></span></p>
             <p><strong>Phone Number:</strong> <span id="receipt-phone-number"></span></p>
             <table class="receipt-table">

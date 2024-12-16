@@ -21,7 +21,7 @@ async function loadMenu() {
                     <h6>${item.category}</h6>
                     <h5>${item.name}</h5>
                     <p>${item.description}</p>
-                    <p><strong>Rp${item.price}</strong></p>
+                    <p><strong>Rp ${(item.price)/1000}k</strong></p>
                     <div class="order-controls">
                         <button class="subtract-btn">-</button>
                         <input type="text" class="quantity" value="0" readonly>
@@ -69,7 +69,7 @@ function attachEventListeners() {
                 }
                 totalPrice += quantity * price;
             });
-            document.getElementById('total-price').textContent = totalPrice;
+            document.getElementById('total-price').textContent = totalPrice/1000;
         }
 
         // Add item quantity

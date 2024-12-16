@@ -1,11 +1,22 @@
 import { Request, Response } from 'express';
 import OrderModel from '../models/order.model';
-import ProductModel from '../models/products.model';
 import mail from '../utils/mail';
 
 async function createOrder(req: Request, res: Response) {
   try {
-    const { orderItems, email, telp, table } = req.body;
+    const { orderItems, username, email, telp, table } = req.body;
+
+    if (!username) {
+      return res.status(400).json({ message: 'Name is required.' });
+    }
+    
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required.' });
+    }
+
+    if (!telp) {
+      return res.status(400).json({ message: 'Phone number is required.' });
+    }
 
     if (!table) {
       return res.status(400).json({ message: 'Table number is required.' });
@@ -23,6 +34,7 @@ async function createOrder(req: Request, res: Response) {
     const newOrder = new OrderModel({
       grandTotal,
       orderItems,
+      username,
       email,
       telp,
       table,
@@ -37,6 +49,7 @@ async function createOrder(req: Request, res: Response) {
         customerEmail: email,
         orderItems: savedOrder.orderItems,
         grandTotal: savedOrder.grandTotal,
+        username: savedOrder.username,
         contactEmail: "foodscoop@example.com",
         companyName: "FoodScoop",
         year: new Date().getFullYear(),
@@ -64,9 +77,10 @@ async function createOrder(req: Request, res: Response) {
 
 async function findAllOrders(req: Request, res: Response) {
   try {
-    const { email, telp, table } = req.query;
+    const { username, email, telp, table } = req.query;
 
     const query: any = {};
+    if (username) query.username = username;
     if (email) query.email = email;
     if (telp) query.telp = telp;
     if (table) query.table = table;

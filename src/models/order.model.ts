@@ -9,6 +9,7 @@ export interface OrderItem {
 export interface Order {
   grandTotal: number;
   orderItems: OrderItem[];
+  username: string;
   email: string; 
   telp: string; 
   table: string; 
@@ -30,17 +31,21 @@ const OrderSchema = new Schema<Order>(
       {
         name: { type: Schema.Types.String, required: true },
         price: { type: Schema.Types.Number, required: true },
-        quantity: { type: Schema.Types.Number, required: true, min: 1, max: 5 },
+        quantity: { type: Schema.Types.Number, required: true },
       },
     ],
+    username: {
+      type: Schema.Types.String,
+      required: true,
+    },
     email: {
       type: Schema.Types.String,
-      required: false,
+      required: true,
       match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address"],
     },
     telp: {
       type: Schema.Types.String,
-      required: false,
+      required: true,
     },
     table: {
       type: Schema.Types.String,

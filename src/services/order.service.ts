@@ -1,5 +1,4 @@
 import OrderModel, { Order } from "../models/order.model";
-import ProductsModel from "../models/products.model";
 
 export const createOrder = async (payload: Order): Promise<Order> => {
 
@@ -11,12 +10,13 @@ export const createOrder = async (payload: Order): Promise<Order> => {
 export const findOrders = async (
   page: number,
   limit: number,
-  filters?: { email?: string; telp?: string; table?: string }
+  filters?: { username?: string; email?: string; telp?: string; table?: string }
 ) => {
   const skip = (page - 1) * limit;
 
   // Construct query filters
   const query: any = {};
+  if (filters?.username) query.username = filters.username;
   if (filters?.email) query.email = filters.email;
   if (filters?.telp) query.telp = filters.telp;
   if (filters?.table) query.table = filters.table;
