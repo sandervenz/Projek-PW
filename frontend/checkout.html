@@ -44,6 +44,7 @@
 
         .order-summary,
         .table-selection,
+        .name-input,
         .email-input,
         .phone-number {
             margin-bottom: 20px;
@@ -163,6 +164,54 @@
                 left: 0;
             }
         }
+
+        /* Responsive styles for smaller screens */
+        @media (max-width: 768px) {
+            .order-table th,
+            .order-table td {
+                font-size: 0.9rem; /* Mengurangi ukuran font */
+                padding: 6px; /* Mengurangi padding */
+            }
+
+            .total-price h3 {
+                font-size: 1rem; /* Mengurangi ukuran font total price */
+            }
+
+            .order-table th {
+                white-space: nowrap; /* Menghindari teks header terpotong */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .order-table th,
+            .order-table td {
+                font-size: 0.8rem; /* Ukuran font lebih kecil */
+                padding: 4px; /* Padding lebih kecil */
+            }
+
+            .total-price h3 {
+                font-size: 0.9rem;
+            }
+
+            .checkout-container {
+                padding: 15px; /* Mengurangi padding container */
+            }
+
+            h1 {
+                font-size: 1.5rem; /* Mengurangi ukuran font judul */
+            }
+
+            .btn {
+                font-size: 0.9rem; /* Ukuran font tombol lebih kecil */
+            }
+        }
+
+        /* Kolom Quantity di tengah secara horizontal dan vertikal */
+        .order-table td:nth-child(2), 
+        .order-table th:nth-child(2) {
+            text-align: center; /* Horizontal alignment */
+            vertical-align: middle; /* Vertical alignment */
+        }
     </style>
 </head>
 
@@ -176,7 +225,7 @@
                 <thead>
                     <tr>
                         <th>Item</th>
-                        <th>Quantity</th>
+                        <th>Qty</th>
                         <th>Price</th>
                         <th>Total</th>
                     </tr>
@@ -196,7 +245,7 @@
             <h2>Name</h2>
             <input type="name" id="name" placeholder="Enter your name">
             <p id="name-error" class="error-message"></p>
-        </div><br>
+        </div>
 
         <!-- Email input -->
         <div class="email-input">
