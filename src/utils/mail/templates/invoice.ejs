@@ -73,7 +73,7 @@
             <td><%= item.name %></td>
             <td><%= item.quantity %></td>
             <td>Rp<%= item.price.toLocaleString('id-ID') %></td>
-            <td><%= item.quantity * item.price %></td>
+            <td>Rp<%= (item.quantity * item.price).toLocaleString('id-ID') %></td>
           </tr>
           <% }); %>
           <tr>
