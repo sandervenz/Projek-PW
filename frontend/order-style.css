@@ -20,6 +20,41 @@ body {
     padding: 0 10px; /* Add some padding */
 }
 
+/* Header Styling */
+header {
+    background-color: #008dc7;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header button {
+    padding: 8px 16px;
+    background-color: white;
+    color: #008dc7;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #f1f1f1;
+}
+
+header img {
+    width: 125px; 
+    height: auto;
+    object-fit: contain;
+}
+
 /* Headers */
 h3,
 h4 {
@@ -160,7 +195,7 @@ h4 {
 
 .order-controls button {
     padding: 8px 12px;
-    background-color: #4CAF50;
+    background-color: #008dc7;
     border: none;
     color: white;
     border-radius: 5px;
@@ -169,7 +204,7 @@ h4 {
 }
 
 .order-controls button:hover {
-    background-color: #45a049;
+    background-color: #0078a7;
 }
 
 .order-controls .quantity {

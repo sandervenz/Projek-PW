@@ -209,3 +209,247 @@ h1 {
     cursor: pointer;
 }
 
+/* Basic reset */
+body,
+h1,
+h2,
+h3,
+p,
+table,
+select,
+input {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.order-table th {
+    background-color: #008dc7;
+}
+
+.checkout-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.order-summary,
+.table-selection,
+.name-input,
+.email-input,
+.phone-number {
+    margin-bottom: 20px;
+}
+
+.order-summary h2,
+.total-price h3 {
+    color: #333;
+}
+
+/* Styling for the input fields */
+input[type="name"],
+input[type="email"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Style for buttons */
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #008dc7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0078a7;
+}
+
+.checkout-buttons {
+    margin-top: 20px;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.receipt-table th,
+.receipt-table td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.receipt-total {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Print specific styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .modal-content,
+    .modal-content * {
+        visibility: visible;
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .order-table th,
+    .order-table td {
+        font-size: 0.9rem; /* Mengurangi ukuran font */
+        padding: 6px; /* Mengurangi padding */
+    }
+
+    .total-price h3 {
+        font-size: 1rem; /* Mengurangi ukuran font total price */
+    }
+
+    .order-table th {
+        white-space: nowrap; /* Menghindari teks header terpotong */
+    }
+}
+
+@media (max-width: 480px) {
+    .order-table th,
+    .order-table td {
+        font-size: 0.8rem; /* Ukuran font lebih kecil */
+        padding: 4px; /* Padding lebih kecil */
+    }
+
+    .total-price h3 {
+        font-size: 0.9rem;
+    }
+
+    .checkout-container {
+        padding: 15px; /* Mengurangi padding container */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Mengurangi ukuran font judul */
+    }
+
+    .btn {
+        font-size: 0.9rem; /* Ukuran font tombol lebih kecil */
+    }
+}
+
+/* Kolom Quantity di tengah secara horizontal dan vertikal */
+.order-table td:nth-child(2), 
+.order-table th:nth-child(2) {
+    text-align: center; /* Horizontal alignment */
+    vertical-align: middle; /* Vertical alignment */
+}
+
+/* Header Styling */
+header {
+    background-color: #008dc7;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header button {
+    padding: 8px 16px;
+    background-color: white;
+    color: #008dc7;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #f1f1f1;
+}
+
+header img {
+    width: 125px; 
+    height: auto;
+    object-fit: contain;
+}
