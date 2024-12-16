@@ -72,7 +72,7 @@
           <tr>
             <td><%= item.name %></td>
             <td><%= item.quantity %></td>
-            <td><%= item.price %></td>
+            <td>Rp<%= item.price.toLocaleString('id-ID') %></td>
             <td><%= item.quantity * item.price %></td>
           </tr>
           <% }); %>
@@ -80,7 +80,7 @@
             <td colspan="3" style="text-align: right">
               <strong>Grand Total:</strong>
             </td>
-            <td><strong><%= grandTotal %></strong></td>
+            <td><strong>Rp<%= grandTotal.toLocaleString('id-ID') %></strong></td>
           </tr>
         </table>
         <p>
