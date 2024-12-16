@@ -20,7 +20,7 @@ async function login() {
             localStorage.setItem('authToken', data.data);
 
             // Redirect ke halaman admin atau dashboard
-            window.location.href = "admin-v.html";
+            window.location.href = "order-list.html";
         } else {
             // Tampilkan pesan error jika login gagal
             errorMessage.textContent = data.message || 'Login failed!';

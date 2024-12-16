@@ -34,9 +34,13 @@
         /* Kolom sebelah kiri untuk daftar order */
         .order-list-container {
             width: 65%; /* Lebar kolom kiri */
-            max-height: 500px;
+            max-height: 550px;
             overflow-y: auto; /* Mengaktifkan scroll jika banyak data */
             padding-right: 20px;
+        }
+
+        .order-list-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
         }
 
         /* Kolom sebelah kanan untuk detail order */
@@ -107,15 +111,19 @@
         }
 
         thead {
-            background-color: #59a6f8; /* Warna biru lembut */
+            background-color: #59a6f8; 
             color: white;
             text-align: left;
         }
 
         thead th {
+            position: sticky; 
+            top: 0; 
+            background-color: #59a6f8; 
+            color: white; 
+            z-index: 1; 
             padding: 12px 15px;
-            font-size: 16px;
-            text-transform: uppercase;
+            text-align: left;
         }
 
         tbody tr {

@@ -30,21 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.innerHTML = `
                     <td>${item.name || 'Unknown Item'}</td>
                     <td>${item.quantity || 0}</td>
-                    <td>${price > 0 ? `$${price.toFixed(2)}` : 'N/A'}</td>
-                    <td>${total > 0 ? `$${total.toFixed(2)}` : 'N/A'}</td>
+                    <td>${price > 0 ? `Rp${price.toLocaleString('id-ID')}` : 'N/A'}</td>
+                    <td>${total > 0 ? `Rp${total.toLocaleString('id-ID')}` : 'N/A'}</td>
                 `;
                 orderDetailsElement.appendChild(row);
             });
 
             // Tampilkan total harga di bawah tabel
-            totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+            totalPriceElement.textContent = `Rp${totalPrice.toLocaleString('id-ID')}`;
 
             // Validasi form
+            const nameInput = document.getElementById('name');
             const emailInput = document.getElementById('email');
             const phoneInput = document.getElementById('phone-number');
             const tableNumberSelect = document.getElementById('table-number');
             const confirmOrderButton = document.getElementById('confirm-order-btn');
 
+            const nameErrorElement = document.getElementById('name-error');
             const emailErrorElement = document.getElementById('email-error');
             const phoneErrorElement = document.getElementById('phone-error');
             const tableErrorElement = document.getElementById('table-error');
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const receiptModal = document.getElementById('receipt-modal');
             const transactionDate = document.getElementById('transaction-date');
             const receiptTableNumber = document.getElementById('receipt-table-number');
+            const receiptName = document.getElementById('receipt-name');
             const receiptEmail = document.getElementById('receipt-email');
             const receiptPhoneNumber = document.getElementById('receipt-phone-number');
             const receiptDetails = document.getElementById('receipt-details');
@@ -63,18 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmOrderButton.addEventListener('click', (event) => {
                 event.preventDefault();
 
-                // Validasi nomor meja
-                if (!tableNumberSelect.value) {
-                    tableErrorElement.textContent = 'Silakan pilih nomor meja.';
+                // Validasi nama
+                if (!nameInput.value) {
+                    nameErrorElement.textContent = 'Silahkan isi nama anda';
                     return;
                 } else {
-                    tableErrorElement.textContent = '';
+                    nameErrorElement.textContent = '';
                 }
 
                 // Validasi email
                 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if (emailInput.value && !emailPattern.test(emailInput.value)) {
                     emailErrorElement.textContent = 'Masukkan alamat email yang valid.';
+                    return;
+                } else {
+                    emailErrorElement.textContent = '';
+                }
+
+                if (!emailInput.value) {
+                    emailErrorElement.textContent = 'Silahkan isi Email anda';
                     return;
                 } else {
                     emailErrorElement.textContent = '';
@@ -89,15 +99,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     phoneErrorElement.textContent = '';
                 }
 
+                if (!phoneInput.value) {
+                    phoneErrorElement.textContent = 'Silahkan isi nomor telepon anda';
+                    return;
+                } else {
+                    phoneErrorElement.textContent = '';
+                }
+
+                // Validasi nomor meja
+                if (!tableNumberSelect.value) {
+                    tableErrorElement.textContent = 'Silakan pilih nomor meja.';
+                    return;
+                } else {
+                    tableErrorElement.textContent = '';
+                }
+
                 // Tampilkan modal struk dengan rincian pesanan
                 receiptModal.style.display = 'block';
 
                 const now = new Date();
                 transactionDate.textContent = now.toLocaleString();
                 receiptTableNumber.textContent = tableNumberSelect.value;
+                receiptName.textContent = nameInput.value;
                 receiptEmail.textContent = emailInput.value;
                 receiptPhoneNumber.textContent = phoneInput.value;
-                receiptTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
+                receiptTotalPrice.textContent = `Rp${totalPrice.toLocaleString('id-ID')}`;
 
                 // Tampilkan rincian pesanan di dalam modal struk
                 receiptDetails.innerHTML = '';
@@ -109,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     itemRow.innerHTML = `
                         <td>${item.name || 'Unknown Item'}</td>
                         <td>${item.quantity || 0}</td>
-                        <td>${price > 0 ? `$${price.toFixed(2)}` : 'N/A'}</td>
-                        <td>${total > 0 ? `$${total.toFixed(2)}` : 'N/A'}</td>
+                        <td>${price > 0 ? `Rp${price.toLocaleString('id-ID')}` : 'N/A'}</td>
+                        <td>${total > 0 ? `Rp${total.toLocaleString('id-ID')}` : 'N/A'}</td>
                     `;
                     receiptDetails.appendChild(itemRow);
                 });
@@ -119,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const receiptData = {
                     transactionDate: now.toLocaleString(),
                     tableNumber: tableNumberSelect.value,
+                    name: nameInput.value,
                     email: emailInput.value,
                     phoneNumber: phoneInput.value,
                     orderDetails: order,
@@ -139,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         price: item.price,
                         total: item.total || (item.quantity * item.price) // Hitung total jika belum ada
                     })),
+                    username: nameInput.value,
                     email: emailInput.value,
                     telp: phoneInput.value,
                     table: tableNumberSelect.value,

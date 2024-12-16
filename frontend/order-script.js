@@ -21,13 +21,12 @@ async function loadMenu() {
                     <h6>${item.category}</h6>
                     <h5>${item.name}</h5>
                     <p>${item.description}</p>
-                    <p>Price: $${item.price}</p>
+                    <p><strong>Rp ${(item.price)/1000}k</strong></p>
                     <div class="order-controls">
                         <button class="subtract-btn">-</button>
                         <input type="text" class="quantity" value="0" readonly>
                         <button class="add-btn">+</button>
                     </div>
-                    <p class="total-price">Total: $0.00</p>
                 `;
 
                 menuWrap.appendChild(itemElement);
@@ -53,16 +52,9 @@ function attachEventListeners() {
         const addButton = item.querySelector('.add-btn');
         const subtractButton = item.querySelector('.subtract-btn');
         const quantityInput = item.querySelector('.quantity');
-        const totalPriceElement = item.querySelector('.total-price');
-        const pricePerItem = parseFloat(item.getAttribute('data-price'));
-        const itemName = item.querySelector('h5').textContent;
-
+ 
         // Update total price per item
-        function updateItemTotalPrice() {
-            let quantity = parseInt(quantityInput.value);
-            let itemTotal = pricePerItem * quantity;
-            totalPriceElement.textContent = `Total: $${itemTotal.toFixed(2)}`;
-        }
+        function updateItemTotalPrice() {}
 
         // Update overall total price
         function updateOverallTotalPrice() {
@@ -77,7 +69,7 @@ function attachEventListeners() {
                 }
                 totalPrice += quantity * price;
             });
-            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+            document.getElementById('total-price').textContent = totalPrice/1000;
         }
 
         // Add item quantity
