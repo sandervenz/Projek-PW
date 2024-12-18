@@ -156,6 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Event Klik Tombol CONFIRM di Modal Struk
             document.getElementById('confirm-receipt-btn').addEventListener('click', () => {
+                const loader = document.getElementById('loader'); // Get the loader element
+    
+                // Show loader
+                loader.style.display = 'block';
+
                 // Data order yang akan dikirim ke server
                 const orderData = {
                     grandTotal: totalPrice,
@@ -184,11 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Pesanan berhasil:', data);
+                    // Hide loader after response is received
+                    loader.style.display = 'none'
                     // Tampilkan modal order completed atau redirect ke halaman lain
                     orderCompletedModal.style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    // Hide loader if an error occurs
+                    loader.style.display = 'none';
                 });
             });
 

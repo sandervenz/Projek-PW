@@ -287,3 +287,31 @@ h4 {
         font-size: 1rem !important; /* Smaller font size for h5 on medium screens */
     }
 }
+
+/* Loader Animation */
+.loader {
+    border: 8px solid #f3f3f3; /* Light gray */
+    border-top: 8px solid #008dc7; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    inset: 0; /* Shortcut for top: 0, bottom: 0, left: 0, right: 0 */
+    top: 150px;
+    margin: auto; /* Automatically centers the element */
+    z-index: 9999; /* Ensures it's on top */
+    display: none; /* Hidden by default */
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
