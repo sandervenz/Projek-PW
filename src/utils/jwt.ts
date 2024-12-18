@@ -7,7 +7,7 @@ export interface IUserToken {
 
 // Fungsi untuk menghasilkan token JWT
 export const generateToken = (payload: IUserToken): string => {
-  return jwt.sign(payload, SECRET);
+  return jwt.sign(payload, SECRET, { expiresIn: "1h" });
 };
 
 // Fungsi untuk memvalidasi dan mendapatkan data dari token JWT
