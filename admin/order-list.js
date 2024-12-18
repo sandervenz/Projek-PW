@@ -202,6 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('signOutBtn').addEventListener('click', function () {
         localStorage.removeItem('authToken');
-        window.location.href = 'admin.html';
+        window.location.href = 'index.html';
     });
 });

@@ -237,7 +237,7 @@ document.getElementById('signOutBtn').addEventListener('click', function () {
     // Hapus token dari localStorage
     localStorage.removeItem('authToken');
     // Arahkan ke halaman index.html
-    window.location.href = 'admin.html';
+    window.location.href = 'index.html';
 });
 
 // Initialize and load menu items from backend
