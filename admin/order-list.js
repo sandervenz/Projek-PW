@@ -1,13 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
     const orderTableBody = document.getElementById('order-list-details');
-    const orderSummary = document.getElementById('order-summary');
     const orderTotalPriceElement = document.getElementById('order-total-price');
+    const orderName = document.getElementById('order-nama');
+    const orderDate = document.getElementById('order-tgl');
+    const orderUpdate = document.getElementById('order-update');
     const orderTableNumber = document.getElementById('order-table-number');
     const orderEmail = document.getElementById('order-email');
     const orderPhoneNumber = document.getElementById('order-phone-number');
     const orderStatusElement = document.getElementById('order-status');
     const orderListContainer = document.querySelector('#order-list tbody');
+    const filterSelect = document.getElementById('filter-tanggal');
     let currentOrderId = null; // Menyimpan ID order yang sedang ditampilkan
+    let allOrders = []; // Menyimpan semua data order
 
     // Fungsi untuk menampilkan item dalam tabel (detail order)
     function displayOrderItems(items) {
@@ -23,30 +27,136 @@ document.addEventListener("DOMContentLoaded", function () {
             row.appendChild(quantityCell);
 
             const totalCell = document.createElement('td');
-            totalCell.textContent = `$${(item.quantity * item.price).toFixed(2)}`;
+            totalCell.textContent = `Rp${(item.quantity * item.price).toLocaleString('id-ID')}`;
             row.appendChild(totalCell);
 
             orderTableBody.appendChild(row);
         });
     }
 
+    // Fungsi untuk memformat tanggal
+    function formatDate(isoString) {
+        const date = new Date(isoString);
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Bulan dimulai dari 0
+        const year = date.getFullYear();
+
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+
     // Fungsi untuk menampilkan informasi order
     function displayOrderDetails(order) {
+        const formattedDate = formatDate(order.createdAt);
+        const UpdatedDate = formatDate(order.updatedAt);
         currentOrderId = order._id; // Simpan ID order saat ini
+        orderName.textContent = order.username || "N/A";
+        orderDate.textContent = formattedDate || "N/A";
+        orderUpdate.textContent = UpdatedDate || "N/A";
         orderEmail.textContent = order.email || "N/A";
         orderPhoneNumber.textContent = order.telp || "N/A";
         orderTableNumber.textContent = order.table || "N/A";
         orderStatusElement.value = order.status || "pending";
-        orderTotalPriceElement.textContent = `${order.grandTotal.toFixed(2)}`;
+        orderTotalPriceElement.textContent = `${order.grandTotal.toLocaleString('id-ID')}`;
     }
 
-    const token = localStorage.getItem('authToken'); // Ambil token dari localStorage
-        if (!token) {
-            console.error('Token tidak ditemukan. Tidak dapat mengupdate status order.');
-            return;
-        } else {
-            console.log("Token : ", token);
-        }
+    // Fungsi untuk memfilter tanggal
+    function filterOrdersByDate() {
+        const filterValue = filterSelect.value;
+        const now = new Date();
+
+        let filteredOrders = allOrders.filter(order => {
+            const orderDate = new Date(order.createdAt);
+            if (filterValue === 'today') {
+                return orderDate.toDateString() === now.toDateString();
+            } else if (filterValue === 'this-week') {
+                const startOfWeek = new Date(now);
+                startOfWeek.setDate(now.getDate() - now.getDay()); // Hari pertama minggu ini
+                return orderDate >= startOfWeek && orderDate <= now;
+            } else if (filterValue === 'this-month') {
+                return (
+                    orderDate.getFullYear() === now.getFullYear() &&
+                    orderDate.getMonth() === now.getMonth()
+                );
+            }
+            return true; // Jika filter adalah 'all', tampilkan semua
+        });
+
+        displayOrders(filteredOrders);
+    }
+
+    // Fungsi untuk menampilkan daftar order di tabel
+    function displayOrders(orders) {
+        orderListContainer.innerHTML = '';
+        orders.forEach(order => {
+            const formattedDate = formatDate(order.createdAt);
+            const orderRow = document.createElement('tr');
+            orderRow.classList.add('order-item');
+            orderRow.innerHTML = `
+                <td>${order.table}</td>
+                <td>${order.username}</td>
+                <td>${formattedDate}</td>
+                <td>Rp${order.grandTotal.toLocaleString('id-ID')}</td>
+                <td>${order.status || "Pending"}</td>
+                <td>
+                    <button class="view-details-btn" data-id="${order._id}" title="View">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+            `;
+
+            orderListContainer.appendChild(orderRow);
+        });
+
+        // Tambahkan event listener untuk tombol "View Details"
+        document.querySelectorAll('.view-details-btn, .view-details-btn i').forEach(button => {
+            button.addEventListener('click', function (e) {
+                const buttonElement = e.target.closest('.view-details-btn');
+                if (!buttonElement) return;
+                const orderId = buttonElement.getAttribute('data-id');
+                const selectedOrder = allOrders.find(order => order._id === orderId);
+
+                if (selectedOrder) {
+                    displayOrderDetails(selectedOrder);
+                    displayOrderItems(selectedOrder.orderItems);
+                }
+            });
+        });
+    }
+
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        console.error('Token tidak ditemukan. Tidak dapat mengambil data order.');
+        return;
+    } else {
+        console.log("Token : ", token);
+    }
+
+    // Mengambil data order dari API
+    fetch('https://web-foodscoop-api.vercel.app/menu/orders', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.data && Array.isArray(data.data)) {
+                allOrders = data.data;
+                allOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                displayOrders(allOrders);
+            } else {
+                console.error('Data tidak ditemukan atau struktur respons tidak valid');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching orders:', error);
+        });
+
 
     // Fungsi untuk mengubah status order
     function updateOrderStatus(orderId, newStatus) {
@@ -87,56 +197,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Mengambil data order dari API
-    fetch('https://web-foodscoop-api.vercel.app/menu/orders', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
-                let orders = data.data;
-    
-                // Urutkan orders berdasarkan createdAt dari yang terbaru ke yang terlama
-                orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    
-                // Tampilkan orders di daftar
-                orders.forEach(order => {
-                    const orderRow = document.createElement('tr');
-                    orderRow.classList.add('order-item');
-                    orderRow.innerHTML = `
-                        <td>${order.table}</td>
-                        <td>${order.email}</td>
-                        <td>$${order.grandTotal.toFixed(2)}</td>
-                        <td>${order.status || "Pending"}</td>
-                        <td>
-                            <button class="view-details-btn" data-id="${order._id}">View Details</button>
-                        </td>
-                    `;
-    
-                    orderListContainer.appendChild(orderRow);
-                });
-    
-                // Tambahkan event listener untuk setiap tombol "View Details"
-                document.querySelectorAll('.view-details-btn').forEach(button => {
-                    button.addEventListener('click', function (e) {
-                        const orderId = e.target.getAttribute('data-id');
-                        const selectedOrder = orders.find(order => order._id === orderId);
-    
-                        if (selectedOrder) {
-                            displayOrderDetails(selectedOrder);
-                            displayOrderItems(selectedOrder.orderItems);
-                        }
-                    });
-                });
-            } else {
-                console.error('Data tidak ditemukan atau struktur respons tidak valid');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching orders:', error);
-        });    
+    // Event listener untuk perubahan filter
+    filterSelect.addEventListener('change', filterOrdersByDate);
+
+    document.getElementById('signOutBtn').addEventListener('click', function () {
+        localStorage.removeItem('authToken');
+        window.location.href = 'admin.html';
+    });
 });

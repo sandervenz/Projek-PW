@@ -26,10 +26,12 @@
             background-color: #f8f8f8;
         }
 
-        /* Header Styling */
-        header {
-            background-color: #333;
-            padding: 20px;
+        h1 {
+            font-size: 50px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            margin-top: 30px;
         }
 
         .site-branding a img {
@@ -97,6 +99,7 @@
             gap: 10px;
             padding: 10px 0;
             background-color: #f1f1f1;
+            margin-bottom: 0px;
         }
 
         .item-actions button {
@@ -198,39 +201,100 @@
             background-color: #e67e22;
         }
 
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around; /* Tombol Sign Out di kanan */
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #59a6f8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            gap: 500px;
+        }
+
+        /* Kontainer untuk tombol Edit Menu dan Show Order List yang ada di tengah */
+        .header .header-buttons {
+            display: flex;
+            gap: 20px; /* Jarak antar tombol */
+        }
+
+        /* Gaya untuk tombol lainnya */
+        #edit-menu,
+        #show-order-list {
+            padding: 10px 20px;
+            background-color: white;
+            color: #59a6f8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+
+        .header h2 {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            position: fixed;
+        }
+
+        #edit-menu:hover,
+        #show-order-list:hover {
+            background-color: #4b94e0;
+            color: white;
+        }
+
+        /* Tombol Sign Out */
+        #signOutBtn {
+            background: transparent;
+            color: #f44336;
+            border: 1px solid #f44336;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #signOutBtn:hover {
+            color: white;
+            background-color: #f44336;
+        }
+
     </style>
 </head>
 
 <body id="home">
-    <header>
-        <div class="container psr">
-            <div class="header_default">
-                <div class="site-branding">
-                    <a href="admin-v.html" class="logo">
-                        <img src="../frontend/images/food-scoop-logo-white.png" alt="" class="logo-1">
-                        <img src="../frontend/images/food-scoop-logo.png" alt="" class="logo-2">
-                    </a>
-                </div>
-                <!-- Tambahkan Sign Out Button -->
-                <div style="position: absolute; right: 20px; top: 20px;">
-                    <button id="signOutBtn" style="color: red; background: none; border: none; font-size: 16px; cursor: pointer;">SIGN OUT</button>
-                </div>
-            </div>
+    <!-- Header Navigasi -->
+    <div class="header">
+        <!-- Kontainer untuk tombol Edit Menu dan Show Order List di tengah -->
+        <div class="header-buttons">
+            <button id="edit-menu">Edit Menu</button>
+            <button id="show-order-list"  onclick="location.href='order-list.html'">Show Order List</button>
         </div>
-    </header>
+        <h2>FoodScoop Admin</h2>
+        <!-- Tombol Sign Out -->
+        <button id="signOutBtn">Sign Out</button>
+    </div>
 
     <section class="foodmenu" id="foodmenu">
         <div class="container">
-            <h3>Menu</h3>
+            <h1>Menu</h1>
+            <div class="add-item-container" style="text-align: start; margin: 20px;">
+                <button class="add-item-btn" onclick="scrollToOrderForm()">Add Item</button>
+            </div>
             <div class="menuitems_wrap" id="menuItemsList">
                 <!-- Menu items will be dynamically loaded here -->
             </div>
         </div>      
-    </section>
-
-    <div class="add-item-container" style="text-align: center; margin: 20px 0;">
-        <button class="add-item-btn" onclick="scrollToOrderForm()">Add Item</button>
-    </div>  
+    </section>  
 
     <section class="order-form">
         <div class="container">
@@ -245,14 +309,6 @@
             </form>
         </div>
     </section>
-
-<!-- Button to show the list of orders -->
-<div class="list-pesanan-container">
-    <a href="order-list.html" class="list-pesanan-btn">
-        Show Order List
-    </a>
-</div>
-
 
     <script src="admin-v.js"></script>
 </body>

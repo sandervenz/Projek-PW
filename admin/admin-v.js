@@ -20,7 +20,7 @@ function loadMenuItems() {
                         <div class="item-info">
                             <h6>${item.category}</h6>
                             <h5>${item.name}</h5>
-                            <p>Price: $${item.price.toFixed(2)}</p>
+                            <p>Price: Rp${item.price.toLocaleString('id-ID')}</p>
                             <p class="item-description">${item.description}</p>
                         </div>
                         <div class="item-actions">

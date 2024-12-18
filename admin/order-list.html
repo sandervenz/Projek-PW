@@ -2,25 +2,38 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Daftar Pesanan</title>
+
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    />
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
     <style>
         /* Gaya CSS untuk merapikan tampilan */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f9f9f9;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-y: scroll; /* Scroll selalu tampil */
         }
 
         h1 {
+            font-size: 35px;
             text-align: center;
             color: #333;
             margin-bottom: 20px;
+            margin-top: 70px;
         }
 
         /* Container untuk dua bagian di bawah judul */
@@ -28,24 +41,19 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
         }
 
         /* Kolom sebelah kiri untuk daftar order */
         .order-list-container {
             width: 65%; /* Lebar kolom kiri */
             max-height: 550px;
-            overflow-y: auto; /* Mengaktifkan scroll jika banyak data */
-            padding-right: 20px;
-        }
-
-        .order-list-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            overflow-y: scroll; /* Mengaktifkan scroll jika banyak data */
         }
 
         /* Kolom sebelah kanan untuk detail order */
         .order-details-container {
-            width: 30%; /* Lebar kolom kanan */
+            width: 32%; /* Lebar kolom kanan */
             position: sticky;
             top: 15px;
             height: auto;
@@ -56,8 +64,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
             border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         th,
@@ -77,6 +85,11 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 18px;
+            color: #333;
+            border-bottom: 2px solid #59a6f8;
         }
 
         #order-summary h3 {
@@ -85,12 +98,11 @@
         }
 
         select {
-            padding: 8px;
-            margin-top: 10px;
-            width: 100%;
+            padding: 5px;
+            width: 120px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .status {
@@ -99,15 +111,6 @@
 
         .status label {
             font-weight: bold;
-        }
-
-        /* Gaya untuk tabel */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'Arial', sans-serif;
-            margin: 20px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         thead {
@@ -141,6 +144,7 @@
             color: #333;
         }
 
+
         /* Gaya untuk tombol */
         button.view-details-btn {
             padding: 8px 12px;
@@ -158,24 +162,99 @@
         }
 
         /* Gaya untuk kolom total */
-        td:nth-child(3), #order-total-price {
-            font-weight: bold;
-            color: #333;
+        td:nth-child(2),
+        #order-list td:nth-child(1),
+        #order-list td:nth-child(5),
+        #order-list td:nth-child(6),
+        #order-list th,
+        #order-list-table th {
+            text-align: center; /* Horizontal alignment */
         }
 
-        /* Gaya untuk judul */
-        #order-summary {
-            margin: 20px 0;
-            padding: 10px;
-            font-size: 18px;
-            color: #333;
-            border-bottom: 2px solid #59a6f8;
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around; /* Tombol Sign Out di kanan */
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #59a6f8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            gap: 500px;
+        }
+
+        /* Kontainer untuk tombol Edit Menu dan Show Order List yang ada di tengah */
+        .header .header-buttons {
+            display: flex;
+            gap: 20px; /* Jarak antar tombol */
+        }
+
+        /* Gaya untuk tombol lainnya */
+        #edit-menu,
+        #show-order-list {
+            padding: 10px 20px;
+            background-color: white;
+            color: #59a6f8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+
+        .header h2 {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            position: fixed;
+        }
+
+        #edit-menu:hover,
+        #show-order-list:hover {
+            background-color: #4b94e0;
+            color: white;
+        }
+
+        /* Tombol Sign Out */
+        #signOutBtn {
+            background: transparent;
+            color: #f44336;
+            border: 1px solid #f44336;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #signOutBtn:hover {
+            color: white;
+            background-color: #f44336;
         }
 
     </style>
 </head>
 
 <body>
+    <!-- Header Navigasi -->
+    <div class="header">
+        <!-- Kontainer untuk tombol Edit Menu dan Show Order List di tengah -->
+        <div class="header-buttons">
+            <button id="edit-menu" onclick="location.href='admin-v.html'">Edit Menu</button>
+            <button id="show-order-list">Show Order List</button>
+        </div>
+        <h2>FoodScoop Admin</h2>
+        <!-- Tombol Sign Out -->
+        <button id="signOutBtn">Sign Out</button>
+    </div>
+
     <!-- Judul Halaman -->
     <h1>Daftar Pesanan</h1>
 
@@ -187,7 +266,16 @@
                 <thead>
                     <tr>
                         <th>Meja</th>
-                        <th>Email</th>
+                        <th>Nama</th>
+                        <th>
+                            <!-- Filter Select Dropdown -->
+                            <select id="filter-tanggal">
+                                <option value="all">Tanggal</option>
+                                <option value="today">Hari Ini</option>
+                                <option value="this-week">Minggu Ini</option>
+                                <option value="this-month">Bulan Ini</option>
+                            </select>
+                        </th>                                      
                         <th>Total Harga</th>
                         <th>Status</th>
                         <th>Details</th>
@@ -205,7 +293,7 @@
                 <thead>
                     <tr>
                         <th>Item</th>
-                        <th>Kuantitas</th>
+                        <th>Qty</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -216,11 +304,13 @@
 
             <!-- Order Summary -->
             <div id="order-summary">
-                <h4>Total Harga: $<span id="order-total-price">0.00</span></h4>
+                <p><strong>Nama:</strong> <span id="order-nama"></span></p>
                 <p><strong>Meja:</strong> <span id="order-table-number"></span></p>
                 <p><strong>Email:</strong> <span id="order-email"></span></p>
                 <p><strong>Nomor Telepon:</strong> <span id="order-phone-number"></span></p>
-
+                <p><strong>Total Harga: Rp<span id="order-total-price">0</span></strong></p>
+                <p><strong>Tanggal:</strong> <span id="order-tgl"></span></p>
+                <p><strong>Diperbarui:</strong> <span id="order-update"></span></p>
                 <!-- Status Pilihan -->
                 <div class="status">
                     <label for="order-status">Status Pesanan:</label>
@@ -230,7 +320,7 @@
                         <option value="completed">Completed</option>
                     </select>
                     <p id="status-message" style="margin-top: 10px;"></p>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
