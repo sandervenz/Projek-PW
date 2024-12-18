@@ -21,7 +21,7 @@ async function loadMenu() {
                     <h6>${item.category}</h6>
                     <h5>${item.name}</h5>
                     <p>${item.description}</p>
-                    <p><strong>Rp ${(item.price)/1000}k</strong></p>
+                    <p><strong>Rp${item.price.toLocaleString('id-ID')}</strong></p>
                     <div class="order-controls">
                         <button class="subtract-btn">-</button>
                         <input type="text" class="quantity" value="0" readonly>
@@ -69,7 +69,7 @@ function attachEventListeners() {
                 }
                 totalPrice += quantity * price;
             });
-            document.getElementById('total-price').textContent = totalPrice/1000;
+            document.getElementById('total-price').textContent = totalPrice.toLocaleString('id-ID');
         }
 
         // Add item quantity
@@ -97,7 +97,7 @@ function attachEventListeners() {
         continueShoppingButton.addEventListener('click', () => {
             // Store the order data in localStorage
             localStorage.setItem('order', JSON.stringify(order));
-            localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+            localStorage.setItem('totalPrice', totalPrice);
             console.log('Order saved to localStorage:', order); // Debugging
             window.location.href = 'checkout.html';
         });
