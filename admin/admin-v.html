@@ -30,8 +30,7 @@
             font-size: 50px;
             text-align: center;
             color: #333;
-            margin-bottom: 10px;
-            margin-top: 30px;
+            margin-top: 70px;
         }
 
         .site-branding a img {
@@ -111,13 +110,13 @@
         }
 
         .item-actions .edit-btn {
-            background-color: #4CAF50;
+            background-color: #59a6f8;
             color: white;
             border: none;
         }
 
         .item-actions .edit-btn:hover {
-            background-color: #45a049;
+            background-color: #368ce7;
         }
 
         .item-actions .delete-btn {
@@ -133,8 +132,8 @@
         /* Add Item Form */
         .order-form {
             background-color: #fff;
-            padding: 30px;
-            margin: 50px 0;
+            padding: 20px;
+            margin: 10px 0;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -151,39 +150,20 @@
         }
 
         .order-form button {
-            background-color: #f44336;
+            background-color: #59a6f8;
             color: white;
             cursor: pointer;
             border: none;
         }
 
         .order-form button:hover {
-            background-color: #e53935;
-        }
-
-        /* Remove the Order Now Button */
-        .order-now-container {
-            display: none;
+            background-color: #368ce7;
         }
 
         /* List Pesanan Button */
         .list-pesanan-container {
             margin-top: 20px;
             text-align: center;
-        }
-
-        .list-pesanan-btn {
-            padding: 12px 24px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .list-pesanan-btn:hover {
-            background-color: #45a049;
         }
 
         .add-item-btn {
@@ -214,7 +194,7 @@
             background-color: #59a6f8;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 100;
-            gap: 500px;
+            gap: 600px;
         }
 
         /* Kontainer untuk tombol Edit Menu dan Show Order List yang ada di tengah */
@@ -268,6 +248,37 @@
             background-color: #f44336;
         }
 
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
     </style>
 </head>
 
@@ -284,17 +295,10 @@
         <button id="signOutBtn">Sign Out</button>
     </div>
 
-    <section class="foodmenu" id="foodmenu">
-        <div class="container">
-            <h1>Menu</h1>
-            <div class="add-item-container" style="text-align: start; margin: 20px;">
-                <button class="add-item-btn" onclick="scrollToOrderForm()">Add Item</button>
-            </div>
-            <div class="menuitems_wrap" id="menuItemsList">
-                <!-- Menu items will be dynamically loaded here -->
-            </div>
-        </div>      
-    </section>  
+    <h1>Menu</h1>
+    <div class="add-item-container" style="text-align: start; margin-left: 160px;">
+        <button class="add-item-btn" onclick="scrollToOrderForm()">Add Item</button>
+    </div>
 
     <section class="order-form">
         <div class="container">
@@ -309,6 +313,18 @@
             </form>
         </div>
     </section>
+
+    <section class="foodmenu" id="foodmenu">
+        <div class="container">
+            <div class="menuitems_wrap" id="menuItemsList">
+                <!-- Menu items will be dynamically loaded here -->
+            </div>
+        </div>      
+    </section>
+
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div> 
 
     <script src="admin-v.js"></script>
 </body>

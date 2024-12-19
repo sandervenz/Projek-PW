@@ -6,6 +6,12 @@ function loadMenuItems() {
     const menuItemsList = document.getElementById('menuItemsList');
     menuItemsList.innerHTML = '';
 
+    // Mengambil elemen loading
+    const loadingElement = document.getElementById('loading');
+
+    // Tampilkan animasi loading
+    loadingElement.style.display = 'flex';
+
     // Fetch menu items from the backend
     fetch('https://web-foodscoop-api.vercel.app/menu/products')
         .then(response => response.json())
@@ -36,6 +42,10 @@ function loadMenuItems() {
         })
         .catch(error => {
             console.error('Error fetching menu items:', error);
+        })
+        .finally(() => {
+            // Sembunyikan animasi loading setelah proses selesai
+            loadingElement.style.display = 'none';
         });
 }
 
@@ -63,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             const orderForm = document.querySelector(".order-form");
             if (orderForm) {
-                orderForm.scrollIntoView({ behavior: "smooth" });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }, 500); // Adjust delay as needed
     }
@@ -192,6 +202,9 @@ async function deleteMenuItem(itemId) {
 }
 
 function editMenuItem(itemId) {
+    // Pindah ke bagian paling atas halaman
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     console.log("Editing item with ID:", itemId); // Debugging untuk memastikan ID benar
 
     // Ambil data menu berdasarkan ID

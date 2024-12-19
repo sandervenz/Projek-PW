@@ -135,6 +135,12 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Token : ", token);
     }
 
+    // Mengambil elemen loading
+    const loadingElement = document.getElementById('loading');
+
+    // Tampilkan animasi loading
+    loadingElement.style.display = 'flex';
+
     // Mengambil data order dari API
     fetch('https://web-foodscoop-api.vercel.app/menu/orders', {
         method: 'GET',
@@ -155,6 +161,10 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => {
             console.error('Error fetching orders:', error);
+        })
+        .finally(() => {
+            // Sembunyikan animasi loading setelah proses selesai
+            loadingElement.style.display = 'none';
         });
 
 
@@ -173,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Something went wrong');
             }
-            return response.json(); // Parse respons jika sukses
+            return response.json(); // Parse respons jika sukses            
         })
         .then(data => {
             console.log('Response Data:', data);
@@ -182,12 +192,10 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.reload();
         })
         .catch(error => {
-            console.error('Terjadi kesalahan:', error.message);
             alert(`Gagal memperbarui status order: ${error.message}`);
-        });
-        
-        
+        })
     }
+    
 
     // Event listener untuk mengubah status order
     orderStatusElement.addEventListener('change', function () {
