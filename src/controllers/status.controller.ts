@@ -30,7 +30,7 @@ async function changeOrderStatus(req: Request, res: Response) {
   } catch (error) {
     const err = error as Error;
     res.status(500).json({
-      message: 'Failed to update order status',
+      message: 'Gagal memperbarui status pesanan',
       data: err.message,
     });
   }
