@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Invoice</title>
+    <title>Struk Pembelian</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -56,16 +56,16 @@
   <body>
     <div class="email-container">
       <div class="header">
-        <h1>Invoice</h1>
+        <h1>Struk Pembelian</h1>
       </div>
       <div class="content">
-        <h2>Thank you for your purchase, <%= username %>!</h2>
-        <p>Thank you for your order. Below are the details of your purchase:</p>
+        <h2>Terima kasih atas pembelian Anda, <%= username %>!</h2>
+        <p>Terima kasih atas pesanan Anda. Berikut adalah rincian pembelian Anda:</p>
         <table class="order-details">
           <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th>Produk</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
             <th>Total</th>
           </tr>
           <% orderItems.forEach(function(item) { %>
@@ -78,20 +78,19 @@
           <% }); %>
           <tr>
             <td colspan="3" style="text-align: right">
-              <strong>Grand Total:</strong>
+              <strong>Total Harga:</strong>
             </td>
             <td><strong>Rp<%= grandTotal.toLocaleString('id-ID') %></strong></td>
           </tr>
         </table>
         <p>
-          If you have any questions about your order, please contact us at <%=
-          contactEmail %>.
+          Jika Anda memiliki pertanyaan tentang pesanan Anda, silakan hubungi kami di <%= contactEmail %>.
         </p>
-        <p>Best regards,</p>
+        <p>Salam hormat,</p>
         <p><%= companyName %></p>
       </div>
       <div class="footer">
-        <p>&copy; <%= year %> <%= companyName %>. All rights reserved.</p>
+        <p>&copy; <%= year %> <%= companyName %>.</p>
       </div>
     </div>
   </body>
