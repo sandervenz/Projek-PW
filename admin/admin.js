@@ -28,11 +28,11 @@ async function login() {
             window.location.href = "order-list.html";
         } else {
             // Tampilkan pesan error jika login gagal
-            errorMessage.textContent = data.message || 'Login failed!';
+            errorMessage.textContent = 'Login gagal!';
         }
     } catch (error) {
         // Tangani error jika request gagal
-        errorMessage.textContent = 'An error occurred. Please try again.';
+        errorMessage.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
     } finally {
         // Sembunyikan animasi loading
         loadingOverlay.classList.remove('visible');
