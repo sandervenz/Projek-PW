@@ -39,14 +39,14 @@ export default {
       await loginSchema.validate({ username, password });
       const token = await login({ username, password });
       res.status(200).json({
-        message: "login success",
+        message: "login sukses",
         data: token,
       });
     } catch (error) {
       const err = error as Error;
       res.status(500).json({
         data: null,
-        message: "Username or Password are invalid",
+        message: "Username atau Password tidak valid",
       });
     }
   },

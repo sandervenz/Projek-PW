@@ -6,16 +6,16 @@ class FeedbackController {
         const { name, email, message } = req.body;
 
         if (!name || !email || !message) {
-            res.status(400).json({ error: 'Name, email, and message are required!' });
+            res.status(400).json({ error: 'Nama, email, and pesan diperlukan!' });
             return;
         }
 
         try {
             const feedback = await feedbackService.addFeedback(name, email, message);
-            res.status(201).json({ message: 'Feedback submitted successfully!', feedback });
+            res.status(201).json({ message: 'Pesan berhasil dikirim!', feedback });
         } catch (error) {
             console.error('Error saving feedback:', error);
-            res.status(500).json({ error: 'Failed to submit feedback.' });
+            res.status(500).json({ error: 'Gagal mengirim pesan.' });
         }
     }
 }
