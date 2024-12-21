@@ -7,20 +7,20 @@ async function createOrder(req: Request, res: Response) {
     const { orderItems, username, email, telp, table } = req.body;
 
     if (!username) {
-      return res.status(400).json({ message: 'Name is required.' });
+      return res.status(400).json({ message: 'Nama diperlukan.' });
     }
     
     if (!email) {
-      return res.status(400).json({ message: 'Email is required.' });
+      return res.status(400).json({ message: 'Email diperlukan.' });
     }
-
+    
     if (!telp) {
-      return res.status(400).json({ message: 'Phone number is required.' });
+      return res.status(400).json({ message: 'Nomor telepon diperlukan.' });
     }
-
+    
     if (!table) {
-      return res.status(400).json({ message: 'Table number is required.' });
-    }
+      return res.status(400).json({ message: 'Nomor meja diperlukan.' });
+    }    
 
     let grandTotal = 0;
 
@@ -60,7 +60,7 @@ async function createOrder(req: Request, res: Response) {
 
       await mail.send({
         to: email,
-        subject: "Invoice for Your Order",
+        subject: "Struk untuk Pesanan Anda",
         content: emailContent,
       });
     }
