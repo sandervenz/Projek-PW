@@ -1,6 +1,6 @@
 let editingIndex = null;
 
-console.log('Token saved to localStorage:', localStorage.getItem('authToken'));
+console.log('Token:', localStorage.getItem('authToken'));
 
 function loadMenuItems() {
     const menuItemsList = document.getElementById('menuItemsList');
@@ -49,10 +49,6 @@ function loadMenuItems() {
         });
 }
 
-function showOrderList() {
-    alert('This will show the list of orders in the future.');
-}
-
 function scrollToOrderForm() {
     // Simpan status di sessionStorage
     sessionStorage.setItem("scrollToOrderForm", "true");
@@ -97,7 +93,7 @@ async function addMenuItem() {
     // Ambil token dari localStorage
     const token = localStorage.getItem('authToken');
     if (!token) {
-        alert('You must be logged in to add a menu item.');
+        alert('Anda harus login untuk menambahkan produk.');
         return;
     }
 
@@ -116,15 +112,15 @@ async function addMenuItem() {
         const data = await response.json();
 
         if (response.ok) {
-            alert('Menu item added successfully!');
+            alert('produk berhasil ditambahkan!');
             loadMenuItems(); // Perbarui menu setelah item ditambahkan
             resetForm(); // Reset form input
         } else {
-            alert(data.message || 'Failed to add menu item. Please try again.');
+            alert('Gagal menambahkan produk. Silakan coba lagi.');
         }
     } catch (error) {
         console.error('Error adding menu item:', error);
-        alert('An error occurred. Please try again.');
+        alert('Terjadi kesalahan. Silakan coba lagi.');
     }
 }
 
@@ -139,7 +135,7 @@ async function updateMenuItem() {
     // Ambil token untuk autentikasi
     const token = localStorage.getItem('authToken');
     if (!token) {
-        alert('You must be logged in to update a menu item.');
+        alert('Anda harus login untuk memperbarui produk.');
         return;
     }
 
@@ -157,15 +153,15 @@ async function updateMenuItem() {
         const data = await response.json();
 
         if (response.ok) {
-            alert('Menu item updated successfully!');
+            alert('Produk berhasil diperbarui!');
             loadMenuItems(); // Perbarui tampilan menu setelah item diperbarui
             resetForm(); // Reset form input setelah update
         } else {
-            alert(data.message || 'Failed to update menu item. Please try again.');
+            alert('Gagal memperbarui produk. Silakan coba lagi.');
         }
     } catch (error) {
         console.error('Error updating menu item:', error);
-        alert('An error occurred while updating the item. Please try again.');
+        alert('Terjadi kesalahan saat memperbarui produk. Silakan coba lagi.');
     }
 }
 
@@ -173,7 +169,7 @@ async function deleteMenuItem(itemId) {
     // Ambil token dari localStorage
     const token = localStorage.getItem('authToken');
     if (!token) {
-        alert('You must be logged in to delete a menu item.');
+        alert('Anda harus login untuk menghapus produk.');
         return;
     }
 
@@ -190,14 +186,14 @@ async function deleteMenuItem(itemId) {
         const data = await response.json();
 
         if (response.ok) {
-            alert('Menu item deleted successfully!');
+            alert('Produk berhasil dihapus!');
             loadMenuItems(); // Perbarui daftar menu setelah item dihapus
         } else {
-            alert(data.message || 'Failed to delete menu item. Please try again.');
+            alert(data.message || 'Gagal menghapus produk. Silakan coba lagi.');
         }
     } catch (error) {
         console.error('Error deleting menu item:', error);
-        alert('An error occurred. Please try again.');
+        alert('Terjadi kesalahan. Silakan coba lagi.');
     }
 }
 
@@ -205,7 +201,7 @@ function editMenuItem(itemId) {
     // Pindah ke bagian paling atas halaman
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    console.log("Editing item with ID:", itemId); // Debugging untuk memastikan ID benar
+    console.log("Edit produk dengan ID:", itemId); // Debugging untuk memastikan ID benar
 
     // Ambil data menu berdasarkan ID
     fetch(`https://web-foodscoop-api.vercel.app/menu/products/${itemId}`)
@@ -224,7 +220,7 @@ function editMenuItem(itemId) {
                 document.getElementById('itemDescription').value = data.description || ""; 
 
                 // Ubah tombol submit menjadi "Update Item"
-                document.getElementById('submitButton').innerText = 'Perbarui Produk';
+                document.getElementById('submitButton').innerText = 'Perbarui';
 
                 // Set `editingIndex` ke ID item yang sedang diedit
                 editingIndex = itemId;
@@ -243,7 +239,7 @@ function editMenuItem(itemId) {
 function resetForm() {
     editingIndex = null;
     document.getElementById('menuItemForm').reset();
-    document.getElementById('submitButton').innerText = 'Tambah Produk';
+    document.getElementById('submitButton').innerText = 'Tambahkan';
 }
 
 document.getElementById('signOutBtn').addEventListener('click', function () {
