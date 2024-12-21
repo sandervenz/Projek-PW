@@ -4,27 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>Pembayaran</title>
     <link rel="stylesheet" href="checkout.css">
 </head>
 
 <body style="padding-top: 50px;">
     <header>
-        <button onclick="window.location.href='index.html';">Home</button>
+        <button onclick="window.location.href='index.html';">Beranda</button>
         <img src="images/food-scoop-logo-white.png" alt="Food Scoop Logo">
     </header>    
     
     <div class="checkout-container">
-        <h1>Checkout</h1>
+        <h1>Pembayaran</h1>
 
         <div class="order-summary">
-            <h2>Order Details</h2>
+            <h2>Detail Pesanan</h2>
             <table class="order-table">
                 <thead>
                     <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                        <th>Price</th>
+                        <th>Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -34,75 +34,75 @@
             </table>
 
             <div class="total-price">
-                <h3>Total Price: <span id="total-price">$0.00</span></h3>
+                <h3>Total Harga: <span id="total-price">0</span></h3>
             </div>
         </div>
 
         <!-- Name input -->
         <div class="name-input">
-            <h2>Name</h2>
-            <input type="name" id="name" placeholder="Enter your name">
+            <h2>Nama</h2>
+            <input type="name" id="name" placeholder="Masukkan nama Anda">
             <p id="name-error" class="error-message"></p>
         </div>
-
+        
         <!-- Email input -->
         <div class="email-input">
             <h2>Email</h2>
-            <input type="email" id="email" placeholder="Enter your email">
+            <input type="email" id="email" placeholder="Masukkan email Anda">
             <p id="email-error" class="error-message"></p>
         </div>
-
+        
         <!-- Phone number input -->
         <div class="phone-number">
-            <h2>Phone Number</h2>
-            <input type="tel" id="phone-number" placeholder="Enter your phone number">
+            <h2>Nomor Telepon</h2>
+            <input type="tel" id="phone-number" placeholder="Masukkan nomor telepon Anda">
             <p id="phone-error" class="error-message"></p>
         </div>
-
+        
         <div class="table-selection">
-            <h2>Select Your Table</h2>
+            <h2>Pilih Meja Anda</h2>
             <select id="table-number">
-                <option value="" disabled selected>Table Number</option>
-                <option value="1">Table 1</option>
-                <option value="2">Table 2</option>
-                <option value="3">Table 3</option>
-                <option value="4">Table 4</option>
-                <option value="5">Table 5</option>
-                <option value="6">Table 6</option>
-                <option value="7">Table 7</option>
-                <option value="8">Table 8</option>
-                <option value="9">Table 9</option>
-                <option value="10">Table 10</option>
-            </select>
+                <option value="" disabled selected>Nomor Meja</option>
+                <option value="1">Meja 1</option>
+                <option value="2">Meja 2</option>
+                <option value="3">Meja 3</option>
+                <option value="4">Meja 4</option>
+                <option value="5">Meja 5</option>
+                <option value="6">Meja 6</option>
+                <option value="7">Meja 7</option>
+                <option value="8">Meja 8</option>
+                <option value="9">Meja 9</option>
+                <option value="10">Meja 10</option>
+            </select>        
             <p id="table-error" class="error-message"></p>
         </div>
 
         <div class="checkout-buttons">
-            <button class="btn" id="confirm-order-btn">PLACE YOUR ORDER</button>
+            <button class="btn" id="confirm-order-btn">KONFIRMASI PESANAN ANDA</button>
         </div>
-
+        
         <!-- Back to Home Button -->
         <div class="back-to-home">
-            <button class="btn" onclick="window.location.href='order-page.html';">Back to Menu</button>
-        </div>
+            <button class="btn" onclick="window.location.href='order-page.html';">Kembali ke Menu</button>
+        </div>        
     </div>
 
     <!-- Modal for Digital Receipt -->
     <div class="modal" id="receipt-modal">
         <div class="modal-content">
             <span class="close-btn" id="close-modal-btn">&times;</span>
-            <h2>Order Confirmation</h2>
-            <p><strong>Date:</strong> <span id="transaction-date"></span></p>
-            <p><strong>Table:</strong> <span id="receipt-table-number"></span></p>
-            <p><strong>Name:</strong> <span id="receipt-name"></span></p>
+            <h2>Konfirmasi Pesanan</h2>
+            <p><strong>Tanggal:</strong> <span id="transaction-date"></span></p>
+            <p><strong>Meja:</strong> <span id="receipt-table-number"></span></p>
+            <p><strong>Nama:</strong> <span id="receipt-name"></span></p>
             <p><strong>Email:</strong> <span id="receipt-email"></span></p>
-            <p><strong>Phone Number:</strong> <span id="receipt-phone-number"></span></p>
+            <p><strong>Nomor Telepon:</strong> <span id="receipt-phone-number"></span></p>
             <table class="receipt-table">
                 <thead>
                     <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                        <th>Price</th>
+                        <th>Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -111,9 +111,9 @@
                 </tbody>
             </table>
             <div class="receipt-total">
-                <strong>Total Price:</strong> <span id="receipt-total-price"></span>
+                <strong>Total Harga:</strong> <span id="receipt-total-price"></span>
             </div>
-            <button id="confirm-receipt-btn" class="btn">Confirm Order</button>
+            <button id="confirm-receipt-btn" class="btn">Konfirmasi Pesanan</button>
         </div>
     </div>
 
@@ -123,10 +123,10 @@
     <div class="modal" id="order-completed-modal">
         <div class="modal-content">
             <span class="close-btn" id="close-order-completed-btn">&times;</span>
-            <h2>Order Completed!</h2>
-            <p>Your order has been successfully placed.</p>
-            <button id="back-to-home-btn" class="btn">Back to Your Order</button>
-        </div>
+            <h2>Pesanan Selesai!</h2>
+            <p>Pesanan Anda telah berhasil ditempatkan.</p>
+            <button id="back-to-home-btn" class="btn">Kembali ke Pesanan Anda</button>
+        </div>        
     </div>
 
     <script src="checkout.js"></script>
