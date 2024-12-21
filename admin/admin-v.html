@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>FoodScoop - Food & Restaurant Template</title>
+    <title>Tambah/Edit Menu</title>
 
     <link rel="icon" type="image/png" href="../frontend/images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,7 +288,7 @@
         <!-- Kontainer untuk tombol Edit Menu dan Show Order List di tengah -->
         <div class="header-buttons">
             <button id="edit-menu">Edit Menu</button>
-            <button id="show-order-list"  onclick="location.href='order-list.html'">Show Order List</button>
+            <button id="show-order-list"  onclick="location.href='order-list.html'">Daftar Pesanan</button>
         </div>
         <h2>FoodScoop Admin</h2>
         <!-- Tombol Sign Out -->
@@ -297,19 +297,19 @@
 
     <h1>Menu</h1>
     <div class="add-item-container" style="text-align: start; margin-left: 160px;">
-        <button class="add-item-btn" onclick="scrollToOrderForm()">Add Item</button>
+        <button class="add-item-btn" onclick="scrollToOrderForm()">Tambah Produk</button>
     </div>
 
     <section class="order-form">
         <div class="container">
-            <h3>Add/Edit Menu</h3>
+            <h3>Tambah/Edit Menu</h3>
             <form id="menuItemForm">
-                <input type="text" id="itemName" placeholder="Item Name" required>
-                <input type="text" id="itemCategory" placeholder="Category (e.g., Breakfast)" required>
-                <input type="number" id="itemPrice" placeholder="Price" required>
-                <input type="text" id="itemImage" placeholder="Image URL" required>
-                <textarea id="itemDescription" placeholder="Description" rows="4" required></textarea>
-                <button type="button" id="submitButton" onclick="handleSubmit()">Add Item</button>
+                <input type="text" id="itemName" placeholder="Nama Produk" required>
+                <input type="text" id="itemCategory" placeholder="Kategori" required>
+                <input type="number" id="itemPrice" placeholder="Harga" required>
+                <input type="text" id="itemImage" placeholder="URL Gambar" required>
+                <textarea id="itemDescription" placeholder="Deskripsi" rows="4" required></textarea>
+                <button type="button" id="submitButton" onclick="handleSubmit()">Tambah Produk</button>
             </form>
         </div>
     </section>

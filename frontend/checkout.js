@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const loader = document.getElementById('loader'); // Get the loader element
     
                 // Show loader
-                loader.style.display = 'block';
+                loader.classList.add('visible');
 
                 // Data order yang akan dikirim ke server
                 const orderData = {
@@ -190,14 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     console.log('Pesanan berhasil:', data);
                     // Hide loader after response is received
-                    loader.style.display = 'none'
+                    loader.classList.remove('visible');
                     // Tampilkan modal order completed atau redirect ke halaman lain
                     orderCompletedModal.style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     // Hide loader if an error occurs
-                    loader.style.display = 'none';
+                    loader.classList.remove('visible');
                 });
             });
 

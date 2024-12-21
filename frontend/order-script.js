@@ -3,7 +3,7 @@ async function loadMenu() {
     const loader = document.getElementById('loader'); // Get the loader element
     try {
         // Show the loader
-        loader.style.display = 'block';
+        loader.classList.add('visible');
 
         const response = await fetch('https://web-foodscoop-api.vercel.app/menu/products'); // Fetching data from backend
         const data = await response.json(); // Parse the JSON response
@@ -45,7 +45,7 @@ async function loadMenu() {
         console.error('Error fetching menu:', error);
     } finally {
         // Hide the loader
-        loader.style.display = 'none';
+        loader.classList.remove('visible');
     }
 }
 
