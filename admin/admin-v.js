@@ -224,7 +224,7 @@ function editMenuItem(itemId) {
                 document.getElementById('itemDescription').value = data.description || ""; 
 
                 // Ubah tombol submit menjadi "Update Item"
-                document.getElementById('submitButton').innerText = 'Update Item';
+                document.getElementById('submitButton').innerText = 'Perbarui Produk';
 
                 // Set `editingIndex` ke ID item yang sedang diedit
                 editingIndex = itemId;
@@ -243,7 +243,7 @@ function editMenuItem(itemId) {
 function resetForm() {
     editingIndex = null;
     document.getElementById('menuItemForm').reset();
-    document.getElementById('submitButton').innerText = 'Add Item';
+    document.getElementById('submitButton').innerText = 'Tambah Produk';
 }
 
 document.getElementById('signOutBtn').addEventListener('click', function () {
