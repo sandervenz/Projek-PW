@@ -223,7 +223,7 @@ h4 {
 #continue-shopping-btn {
     padding: 15px 40px;
     font-size: 18px;
-    background-color: #FF5722; /* Orange color */
+    background-color: #ffc818; /* Orange color */
     color: white;
     border: none;
     border-radius: 25px;
@@ -234,13 +234,13 @@ h4 {
 }
 
 #continue-shopping-btn:hover {
-    background-color: #e64a19;
+    background-color: #ffbb00;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
 #continue-shopping-btn:active {
-    background-color: #d84315;
+    background-color: #ffbb00;
     transform: translateY(1px);
 }
 

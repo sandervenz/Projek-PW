@@ -442,6 +442,10 @@
 			border: none;
 			text-transform: uppercase;
 		}
+
+		.contactform form input[type="submit"]:hover{
+			background: #ffbb00;
+		}
 		/* -- CONTACT ENDS -- */
 
 
