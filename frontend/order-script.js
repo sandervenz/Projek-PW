@@ -9,7 +9,12 @@ async function loadMenu() {
         const data = await response.json(); // Parse the JSON response
 
         if (response.ok && data && data.data) {
-            const menuItems = data.data; // Assuming the API returns an array of products in data.data
+            let menuItems = data.data; // Assuming the API returns an array of products in data.data
+
+            // Sort menu items based on category order
+            const categoryOrder = { "MAKANAN": 1, "CEMILAN": 2, "MINUMAN": 3 };
+            menuItems = menuItems.sort((a, b) => (categoryOrder[a.category] || 99) - (categoryOrder[b.category] || 99));
+
             const menuWrap = document.getElementById('menu-items');
             menuWrap.innerHTML = ''; // Clear existing content
 
@@ -48,6 +53,7 @@ async function loadMenu() {
         loader.classList.remove('visible');
     }
 }
+
 
 
 // Function to attach event listeners to dynamically added items

@@ -18,6 +18,16 @@ function loadMenuItems() {
         .then(data => {
             if (data.message === "Success get all products" && Array.isArray(data.data)) {
                 const menuItems = data.data;
+
+                // Define the desired order of categories
+                const categoryOrder = ["MAKANAN", "CEMILAN", "MINUMAN"];
+
+                // Sort the menu items by category based on the desired order
+                menuItems.sort((a, b) => {
+                    return categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
+                });
+
+                // Render the sorted menu items
                 menuItems.forEach(item => {
                     const itemDiv = document.createElement('div');
                     itemDiv.classList.add('item');
@@ -48,6 +58,7 @@ function loadMenuItems() {
             loadingElement.style.display = 'none';
         });
 }
+
 
 function scrollToOrderForm() {
     // Simpan status di sessionStorage
