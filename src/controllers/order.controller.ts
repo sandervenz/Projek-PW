@@ -41,7 +41,7 @@ async function createOrder(req: Request, res: Response) {
       email,
       telp,
       table,
-      status: 'pending',
+      status: 'menunggu',
     });
 
     const savedOrder = await newOrder.save();
