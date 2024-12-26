@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Token tidak ditemukan. Tidak dapat mengambil data order.');
         return;
     } else {
-        console.log("Token : ", token);
+        console.log("Token : ", token.slice(0, 10) + '...');
     }
 
     // Mengambil elemen loading

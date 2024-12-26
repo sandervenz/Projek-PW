@@ -1,6 +1,11 @@
 let editingIndex = null;
 
-console.log('Token:', localStorage.getItem('authToken'));
+const token = localStorage.getItem('authToken');
+if (!token) {
+    console.error('Token tidak ditemukan. Tidak dapat mengambil data order.');
+} else {
+    console.log("Token : ", token.slice(0, 10) + '...');
+}
 
 function loadMenuItems() {
     const menuItemsList = document.getElementById('menuItemsList');
