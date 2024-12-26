@@ -7,24 +7,24 @@ async function changeOrderStatus(req: Request, res: Response) {
     const { status } = req.body; // New status
 
     // Validate status
-    const validStatuses = ['pending', 'completed', 'cancelled'];
+    const validStatuses = ['menunggu', 'selesai', 'dibatalkan'];
     if (!validStatuses.includes(status)) {
       return res.status(400).json({
-        message: 'Invalid status. Valid statuses are: pending, completed, cancelled.',
+        message: 'Status tidak valid. Status yang valid adalah: menunggu, selesai, dibatalkan.',
       });
     }
 
     // Find the order by ID and update its status
     const order = await OrderModel.findById(id);
     if (!order) {
-      return res.status(404).json({ message: 'Order not found.' });
+      return res.status(404).json({ message: 'Pesanan tidak ditemukan.' });
     }
 
     order.status = status;
     const updatedOrder = await order.save();
 
     res.status(200).json({
-      message: 'Order status updated successfully',
+      message: 'Pesanan berhasil diperbarui',
       data: updatedOrder,
     });
   } catch (error) {
