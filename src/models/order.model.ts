@@ -14,7 +14,7 @@ export interface Order {
   telp: string; 
   table: string; 
   createdBy: Types.ObjectId;
-  status: "pending" | "completed" | "cancelled";
+  status: "menunggu" | "selesai" | "dibatalkan";
   createdAt?: string;
   updatedAt?: string;
 }
@@ -54,8 +54,8 @@ const OrderSchema = new Schema<Order>(
     createdBy: { type: Schema.Types.ObjectId, ref: "User", required: false },
     status: {
       type: Schema.Types.String,
-      enum: ["pending", "completed", "cancelled"],
-      default: "pending",
+      enum: ["menunggu", "selesai", "dibatalkan"],
+      default: "menunggu",
     },
   },
   {

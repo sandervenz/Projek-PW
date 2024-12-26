@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         orderEmail.textContent = order.email || "N/A";
         orderPhoneNumber.textContent = order.telp || "N/A";
         orderTableNumber.textContent = order.table || "N/A";
-        orderStatusElement.value = order.status || "pending";
+        orderStatusElement.value = order.status || "menunggu";
         orderTotalPriceElement.textContent = `${order.grandTotal.toLocaleString('id-ID')}`;
     }
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${order.username}</td>
                 <td>${formattedDate}</td>
                 <td>Rp${order.grandTotal.toLocaleString('id-ID')}</td>
-                <td>${order.status || "Pending"}</td>
+                <td>${order.status || "Menunggu"}</td>
                 <td>
                     <button class="view-details-btn" data-id="${order._id}" title="View">
                         <i class="fa-solid fa-eye"></i>

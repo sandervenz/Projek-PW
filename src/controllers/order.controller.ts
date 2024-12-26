@@ -31,9 +31,6 @@ async function createOrder(req: Request, res: Response) {
       grandTotal += total;
     }
 
-    // Membulatkan grandTotal ke 2 desimal
-    grandTotal = parseFloat(grandTotal.toFixed(2));
-
     const newOrder = new OrderModel({
       grandTotal,
       orderItems,
