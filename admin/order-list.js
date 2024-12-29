@@ -73,8 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (filterValue === 'today') {
                 return orderDate.toDateString() === now.toDateString();
             } else if (filterValue === 'this-week') {
+                // Menentukan awal minggu (Senin)
                 const startOfWeek = new Date(now);
-                startOfWeek.setDate(now.getDate() - now.getDay()); // Hari pertama minggu ini
+                const day = now.getDay(); // 0 = Minggu
+                const diff = day === 0 ? 6 : day - 1; // Jika Minggu, mundur 6 hari; jika bukan, mundur (day - 1)
+                startOfWeek.setDate(now.getDate() - diff); // Set ke hari Senin
                 return orderDate >= startOfWeek && orderDate <= now;
             } else if (filterValue === 'this-month') {
                 return (
