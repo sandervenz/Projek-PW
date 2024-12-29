@@ -28,7 +28,7 @@ const send = async ({
     content: string;
 }) => {
     const result = await transporter.sendMail({
-        from: "sandervdb@zohomail.com",
+        from: "FoodScoop Admin",
         to,
         subject,
         html: content,

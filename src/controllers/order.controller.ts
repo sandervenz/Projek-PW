@@ -50,7 +50,7 @@ async function createOrder(req: Request, res: Response) {
         orderItems: savedOrder.orderItems,
         grandTotal: savedOrder.grandTotal,
         username: savedOrder.username,
-        contactEmail: "foodscoopadmin@zohomail.com",
+        contactEmail: "foodscoop@zohomail.com",
         companyName: "FoodScoop",
         year: new Date().getFullYear(),
       });
