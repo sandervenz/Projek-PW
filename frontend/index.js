@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Hide loader jika terjadi error
             loader.classList.remove("visible");
 
-            alert("Failed to send feedback. Please try again later.");
+            alert("Gagal mengirim pesan. Coba lagi nanti.");
         }
     });
 });
