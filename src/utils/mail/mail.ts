@@ -28,7 +28,7 @@ const send = async ({
     content: string;
 }) => {
     const result = await transporter.sendMail({
-        from: "FoodScoop Admin",
+        from: USER_MAIL,
         to,
         subject,
         html: content,
