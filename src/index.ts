@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Configure multiple allowed origins
-const allowedOrigins = ["https://web-foodscoop.vercel.app", "https://web-foodscoop-admin.vercel.app", "http://127.0.0.1:5500"];
+const allowedOrigins = ["https://web-foodscoop.vercel.app", "https://web-foodscoop-admin.vercel.app"];
 
 const corsOptions: cors.CorsOptions = {
   origin: (origin, callback) => {
